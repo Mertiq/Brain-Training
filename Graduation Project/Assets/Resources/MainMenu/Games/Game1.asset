@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe4308e1f065924cabd8eb143cdeade, type: 3}
   m_Name: Game1
   m_EditorClassIdentifier: 
-  name: game1
+  _name: game sss
+  image: {fileID: 0}
+  description: bu bir oyun dur
+  category: 0

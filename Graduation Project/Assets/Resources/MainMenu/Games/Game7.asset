@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe4308e1f065924cabd8eb143cdeade, type: 3}
-  m_Name: Game2
+  m_Name: Game7
   m_EditorClassIdentifier: 
-  _name: game sss
+  _name: "\u0131w\u0131w\u0131w\u0131\u0131w"
   image: {fileID: 0}
   description: bu bir oyun dur
   category: 1

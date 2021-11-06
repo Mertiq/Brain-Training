@@ -8,22 +8,38 @@ namespace MainMenu
     public class GamePanelManager : MonoBehaviour
     {
         public GameObject gameCard;
-        public GameObject viewport;
+        public GameObject cardContainer;
         
         Game[] games;
 
-        private void Start()
+        private void Awake()
         {
             games = Resources.LoadAll<Game>("MainMenu/Games");
-
+        }
+        public void InitializeGameCards(string category)
+        {
+            gameObject.SetActive(true);
+            int counter = 0;
             foreach (var game in games)
             {
-                gameCard.GetComponent<GameCard>().SetName(game.name);
-                Instantiate(gameCard, viewport.transform);
+                if(game.category.ToString() == category)
+                {
+                    gameCard.GetComponent<GameCard>().SetName(game._name);
+                    gameCard.GetComponent<GameCard>().SetDescription(game.description);
+                    Instantiate(gameCard, cardContainer.transform);
+                    counter++;
+                }
             }
-
+            SetCardContainerOffset(counter);
         }
 
-
+        void SetCardContainerOffset(int gamesCount)
+        {
+            int cardHeight = ResourceManager.instance.offsetIncreaseValueCardContainer;
+            int bottomPadding = ResourceManager.instance.bottomPaddingForGameCardContainer;
+            int defaultSize = ResourceManager.instance.defaultCardContainerSize;
+            RectTransform rectTransform = cardContainer.GetComponent<RectTransform>();
+            cardContainer.GetComponent<RectTransform>().offsetMin = new Vector2(rectTransform.offsetMin.x, -1*((Mathf.Ceil((gamesCount / 2f)) * cardHeight) + bottomPadding - defaultSize));
+        }
     }
 }
