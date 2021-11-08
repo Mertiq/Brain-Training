@@ -5,6 +5,10 @@ namespace MemoryMatchingGame
 	public class Card : MonoBehaviour
 	{
 		public string cardType;
+		public bool clickable = true;
+		public bool collected = false;
+
+		public ParticleSystem particleSystem;
 
 		private void Start()
 		{
@@ -12,6 +16,6 @@ namespace MemoryMatchingGame
 			cardType = GetComponent<SpriteRenderer>().sprite.name;
 		}
 
-	}
+    }
 }
 
