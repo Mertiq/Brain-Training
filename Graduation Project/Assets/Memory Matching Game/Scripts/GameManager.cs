@@ -17,7 +17,7 @@ namespace MemoryMatchingGame
 		bool canClick = true;
 
 		List<GameObject> cards = new List<GameObject>();
-
+		 
 		private void Start()
 		{
 			GameObject cardsParent = GameObject.Find("Cards");
@@ -45,11 +45,14 @@ namespace MemoryMatchingGame
 							//assign card
 							firstCardObject = hit.collider.gameObject;
 							firstCard = firstCardObject.GetComponent<Card>();
+                            if (firstCard.clickable)
+                            {
+								//turn card
+								firstCardObject.GetComponent<Animator>().SetBool("turn", true);
 
-							//turn card
-							firstCardObject.GetComponent<Animator>().SetBool("turn", true);
-
-							clickCounter++;
+								clickCounter++;
+								firstCard.clickable = false;
+							}
 						}
 						else
 						{
@@ -57,15 +60,19 @@ namespace MemoryMatchingGame
 							secondCardObject = hit.collider.gameObject;
 							secondCard = secondCardObject.GetComponent<Card>();
 
-							//turn card
-							secondCardObject.GetComponent<Animator>().SetBool("turn", true);
+							if (secondCard.clickable)
+							{
+								//turn card
+								secondCardObject.GetComponent<Animator>().SetBool("turn", true);
 
-							canClick = false;
+								canClick = false;
 
-							//check card
-							Invoke("Control", 1.8f);
+								//check card
+								Invoke("Control", 1.8f);
 
-							clickCounter = 0;
+								clickCounter = 0;
+								secondCard.clickable = false;
+							}
 						}
 					}
 				}
@@ -74,32 +81,28 @@ namespace MemoryMatchingGame
 
 		void Control()
 		{
-			if (firstCard.name != secondCard.name)
+			if (firstCard.cardType == secondCard.cardType)
 			{
-				if (firstCard.cardType == secondCard.cardType)
-				{
-					firstCardObject.SetActive(false);
-					secondCardObject.SetActive(false);
+				firstCardObject.GetComponent<Animator>().SetBool("turn", false);
+				secondCardObject.GetComponent<Animator>().SetBool("turn", false);
+				firstCardObject.GetComponent<Animator>().SetBool("collect", true);
+				secondCardObject.GetComponent<Animator>().SetBool("collect", true);
 
-					//if all cards in the scene are active false, you win
-					foreach (var item in cards)
-					{
-						if (item.activeSelf)
-						{
-							canClick = true;
-							return;
-						}
-					}
-					Debug.Log("win");
-				}
-				else
-				{
-					//turn card
-					firstCardObject.GetComponent<Animator>().SetBool("turn", false);
-					secondCardObject.GetComponent<Animator>().SetBool("turn", false);
-				}
-				canClick = true;
+				firstCard.particleSystem.Play();
+				secondCard.particleSystem.Play();
+
+				//win check
+				//	Debug.Log("win");
 			}
+			else
+			{
+				//turn card
+				firstCardObject.GetComponent<Animator>().SetBool("turn", false);
+				secondCardObject.GetComponent<Animator>().SetBool("turn", false);
+				firstCard.clickable = true;
+				secondCard.clickable = true;
+			}
+			canClick = true;
 		}
 	}
 }
