@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe4308e1f065924cabd8eb143cdeade, type: 3}
   m_Name: Game1
   m_EditorClassIdentifier: 
-  _name: game sss
+  _name: Memory Matching Game
   image: {fileID: 0}
-  description: bu bir oyun dur
-  category: 0
+  description: This is a game you match cards
+  category: 2

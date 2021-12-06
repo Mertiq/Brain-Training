@@ -7,6 +7,7 @@ namespace MainMenu
     public enum Category{
         MATH,
         PHYSICS,
+        MEMORY,
     }
 
     [CreateAssetMenu(fileName ="Game", menuName = "ScriptableObjects/MainMenu/Game")]
