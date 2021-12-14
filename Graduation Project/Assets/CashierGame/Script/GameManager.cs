@@ -11,7 +11,6 @@ namespace CashierGame
         float customerMoney;
         float change = 0;
 
-
         private void Start()
         {
             CreateNewLevel();
@@ -28,12 +27,8 @@ namespace CashierGame
             int rand = UnityEngine.Random.Range(1, 4);
             for (int i = 0; i < rand; i++)
             {
-                tempProductPrices.Add(UnityEngine.Random.Range(1, 20));
-            }
-
-            for (int i = 0; i < tempProductPrices.Count; i++)
-            {
-                Debug.Log(tempProductPrices[i]);
+                int price = UnityEngine.Random.Range(1, 20);
+                tempProductPrices.Add(price);
                 tempTotalProductPrice += tempProductPrices[i];
             }
 

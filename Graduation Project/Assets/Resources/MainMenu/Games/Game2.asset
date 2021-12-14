@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe4308e1f065924cabd8eb143cdeade, type: 3}
   m_Name: Game2
   m_EditorClassIdentifier: 
-  _name: game sss
+  _name: Cashier Game
   image: {fileID: 0}
-  description: bu bir oyun dur
-  category: 1
+  description: Cashier Game Desc
+  category: 0

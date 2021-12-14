@@ -15,4 +15,4 @@ MonoBehaviour:
   _name: Memory Matching Game
   image: {fileID: 0}
   description: This is a game you match cards
-  category: 2
+  category: 1
