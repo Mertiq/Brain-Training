@@ -6,7 +6,6 @@ namespace MainMenu
 {
     public enum Category{
         MATH,
-        PHYSICS,
         MEMORY,
     }
 

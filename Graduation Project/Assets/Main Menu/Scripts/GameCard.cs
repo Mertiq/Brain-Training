@@ -9,8 +9,10 @@ namespace MainMenu
     {
         public GameObject nameText;
         public GameObject descriptionText;
+        public string sceneName;
         public void SetName(string name)
         {
+            sceneName = name;
             nameText.GetComponent<Text>().text = name;
         }
         public void SetDescription(string description)

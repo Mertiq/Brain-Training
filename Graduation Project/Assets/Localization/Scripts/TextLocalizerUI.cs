@@ -10,8 +10,12 @@ public class TextLocalizerUI : MonoBehaviour
 
     private void Start()
     {
-        text = GetComponent<Text>();
-        string value = LocalizationSystem.GetLocalizedValue(text.text);
-        text.text = value;
+        text = GetComponent<Text>(); 
+        text.text = LocalizationSystem.GetLocalizedValue(text.text);
+    }
+
+    public void UpdateText()
+    {
+        text.text = LocalizationSystem.GetLocalizedValue(text.text);
     }
 }

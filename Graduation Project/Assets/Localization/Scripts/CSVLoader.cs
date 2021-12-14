@@ -9,9 +9,9 @@ public class CSVLoader: MonoBehaviour
     char lineSeperator = '\n';
     char surround = ';';
 
-    public void LoadCSV()
+    public void LoadCSV(string path)
     {
-        csvFile = Resources.Load<TextAsset>("Localization/Localization");
+        csvFile = Resources.Load<TextAsset>(path);
     }
 
     public Dictionary<string, string> GetDictionaryValues()
@@ -22,9 +22,7 @@ public class CSVLoader: MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             string line = lines[i];
-            Debug.Log(line);
             string[] fields = line.Split(';'); //CSVParser.Split(line);
-            Debug.Log(fields);
             for (int j = 0; j < fields.Length; j++)
             {
                 fields[j] = fields[j].TrimStart(' ', surround);

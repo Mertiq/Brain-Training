@@ -6,10 +6,10 @@ public class LocalizationSystem : MonoBehaviour
 {
     public enum Language
     {
-        English,Türkçe
+        English,Turkce
     }
 
-    public static Language language = Language.Türkçe;
+    public static Language language = Language.Turkce;
 
     public static Dictionary<string, string> dictionary;
 
@@ -18,7 +18,7 @@ public class LocalizationSystem : MonoBehaviour
     public static void Init()
     {
         CSVLoader csvLoader = new CSVLoader();
-        csvLoader.LoadCSV();
+        csvLoader.LoadCSV("Localization/Localization");
         dictionary = csvLoader.GetDictionaryValues();
         isInit = true;
     }
@@ -29,7 +29,7 @@ public class LocalizationSystem : MonoBehaviour
         string trWord = enWord;
         switch (language)
         {
-            case Language.Türkçe:
+            case Language.Turkce:
                 dictionary.TryGetValue(enWord, out trWord);
                 break;
         }
