@@ -18,10 +18,11 @@ public class CSVLoader: MonoBehaviour
     {
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
         string[] lines = csvFile.text.Split(lineSeperator);
-        Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+        //Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
         for (int i = 0; i < lines.Length; i++)
         {
             string line = lines[i];
+            if(line.Length <= 0) break;
             string[] fields = line.Split(';'); //CSVParser.Split(line);
             for (int j = 0; j < fields.Length; j++)
             {
