@@ -28,7 +28,7 @@ namespace CashierGame
             totalProductPriceText.text = totalProductPrice.ToString();
             customerMoneyText.text = customerMoney.ToString();
             changeText.text = change.ToString();
-            totalText.GetComponent<TextLocalizerUI>().UpdateText();
+            //totalText.GetComponent<TextLocalizerUI>().UpdateText();
         }
 
         public void SetChangeText(float change)

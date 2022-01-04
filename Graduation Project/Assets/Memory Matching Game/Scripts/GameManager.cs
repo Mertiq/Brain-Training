@@ -90,6 +90,7 @@ namespace MemoryMatchingGame
 
 				firstCard.particleSystem.Play();
 				secondCard.particleSystem.Play();
+				ScoreManager.IncreaseScore();
 
 				//win check
 				//	Debug.Log("win");
