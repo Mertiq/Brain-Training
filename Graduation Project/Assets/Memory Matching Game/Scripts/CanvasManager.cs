@@ -17,8 +17,8 @@ namespace MemoryMatchingGame
 
         private void Update()
         {
-            collectedCardsText.text = ScoreManager.collectedCardsCount + "/20";
-            scoreText.text = ScoreManager.score.ToString();
+           // collectedCardsText.text = ScoreManager.collectedCardsCount + "/20";
+           // scoreText.text = ScoreManager.score.ToString();
         }
     }
 }

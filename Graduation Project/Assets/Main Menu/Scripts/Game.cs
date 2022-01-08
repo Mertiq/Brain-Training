@@ -1,14 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MainMenu
 {
-    public enum Category{
-        MATH,
-        MEMORY,
-    }
-
     [CreateAssetMenu(fileName ="Game", menuName = "ScriptableObjects/MainMenu/Game")]
     public class Game : ScriptableObject
     {

@@ -11,12 +11,10 @@ public class TextLocalizerUI : MonoBehaviour
     private void Start()
     {
         text = GetComponent<Text>();
-        UpdateText();
     }
 
     public void UpdateText()
     {
-        Debug.Log(gameObject.name + " " + text);
         text.text = LocalizationSystem.GetLocalizedValue(text.text);
     }
 

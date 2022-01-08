@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace MainMenu
@@ -8,13 +9,15 @@ namespace MainMenu
         public GameObject CategoryCard;
         public GameObject viewport;
         public GamePanelManager gmp;
+        public Sprite[] images;
+        int count = 0;
 
         private void Start()
         {
             foreach (var category in Category.GetNames(typeof(Category)))
             {
                 GameObject card= Instantiate(CategoryCard, viewport.transform);
-                card.GetComponent<CategoryCard>().SetName(category);
+                card.GetComponent<CategoryCard>().SetCard(category, images[count++]);
                 card.GetComponent<Button>().onClick.AddListener(() => gmp.InitializeGameCards(category));
                 card.GetComponent<Button>().onClick.AddListener(() => gameObject.SetActive(false));
             }

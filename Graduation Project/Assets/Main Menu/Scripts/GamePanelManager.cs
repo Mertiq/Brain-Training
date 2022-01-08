@@ -24,8 +24,7 @@ namespace MainMenu
             {
                 if(game.category.ToString() == category)
                 {
-                    gameCard.GetComponent<GameCard>().SetName(game._name);
-                    gameCard.GetComponent<GameCard>().SetDescription(game.description);
+                    gameCard.GetComponent<GameCard>().SetGameCard(game._name, game.description, game.image);
                     Instantiate(gameCard, cardContainer.transform);
                     counter++;
                 }

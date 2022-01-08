@@ -29,7 +29,7 @@ namespace MemoryMatchingGame
 
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
 			if (canClick)
 			{

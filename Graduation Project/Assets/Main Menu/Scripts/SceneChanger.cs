@@ -12,5 +12,10 @@ namespace MainMenu
         {
             SceneManager.LoadScene(gameCard.sceneName);
         }
+
+        public void LoadScene(string sceneName)
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

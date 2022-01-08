@@ -39,8 +39,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09179617, y: 0.28048745}
   m_AnchorMax: {x: 0.91960436, y: 0.35723117}
-  m_AnchoredPosition: {x: -0.5, y: 3.5}
-  m_SizeDelta: {x: 5, y: 7}
+  m_AnchoredPosition: {x: -9.507996, y: 1274.6995}
+  m_SizeDelta: {x: 287.2162, y: 506.70306}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1850146104140092112
 CanvasRenderer:
@@ -63,14 +63,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82945275, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f42868e185c41344b8ba401bfed646f2, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 1850146104530573149}
+  imageObject: {fileID: 3839765196647152734}
 --- !u!1 &1850146104530573149
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.5999756, y: 0}
+  m_AnchoredPosition: {x: -17, y: 0}
   m_SizeDelta: {x: -1.1473389, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1850146104530573144
@@ -214,26 +215,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 00c674dd3b3e4b841a46aa861ecbb260, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 250
+    m_MaxSize: 130
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: game9
+  m_Text: MATHEMATK
 --- !u!114 &2535921151974274325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,8 +281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.035278387, y: 0.16372074}
   m_AnchorMax: {x: 0.13900001, y: 0.9203027}
-  m_AnchoredPosition: {x: -3, y: -3}
-  m_SizeDelta: {x: 6, y: 6}
+  m_AnchoredPosition: {x: 180.2, y: -18.2}
+  m_SizeDelta: {x: 78.62958, y: -132.94879}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1229288107726662710
 CanvasRenderer:
