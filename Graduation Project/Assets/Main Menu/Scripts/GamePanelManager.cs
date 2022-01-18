@@ -16,13 +16,20 @@ namespace MainMenu
         {
             games = Resources.LoadAll<Game>("MainMenu/Games");
         }
-        public void InitializeGameCards(string category)
+
+        public void InitializeGameCards(Category category)
         {
             gameObject.SetActive(true);
+
+            for (int i = 0; i < cardContainer.transform.childCount; i++)
+            {
+                Destroy(cardContainer.transform.GetChild(i).gameObject);
+            }
+
             int counter = 0;
             foreach (var game in games)
             {
-                if(game.category.ToString() == category)
+                if(game.category == category)
                 {
                     gameCard.GetComponent<GameCard>().SetGameCard(game._name, game.description, game.image);
                     Instantiate(gameCard, cardContainer.transform);

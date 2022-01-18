@@ -11,6 +11,7 @@ public class TextLocalizerUI : MonoBehaviour
     private void Start()
     {
         text = GetComponent<Text>();
+        UpdateText();
     }
 
     public void UpdateText()

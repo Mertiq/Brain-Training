@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,9 @@ namespace MainMenu
 
         private void Start()
         {
-            foreach (var category in Category.GetNames(typeof(Category)))
+            foreach (Category category in Enum.GetValues(typeof(Category)))
             {
-                GameObject card= Instantiate(CategoryCard, viewport.transform);
+                GameObject card = Instantiate(CategoryCard, viewport.transform);
                 card.GetComponent<CategoryCard>().SetCard(category, images[count++]);
                 card.GetComponent<Button>().onClick.AddListener(() => gmp.InitializeGameCards(category));
                 card.GetComponent<Button>().onClick.AddListener(() => gameObject.SetActive(false));

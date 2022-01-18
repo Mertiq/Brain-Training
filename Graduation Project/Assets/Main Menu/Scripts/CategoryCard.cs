@@ -16,9 +16,9 @@ namespace MainMenu
     {
         public GameObject nameText;
         public GameObject imageObject;
-        public void SetCard(string name, Sprite image)
+        public void SetCard(Category name, Sprite image)
         {
-            nameText.GetComponent<Text>().text = name;
+            nameText.GetComponent<Text>().text = name.ToString();
             imageObject.GetComponent<Image>().sprite = image;
         }
     }
