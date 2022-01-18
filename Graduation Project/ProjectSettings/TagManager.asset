@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Water
+  - Character
+  - FinishPoint
+  - Iron
+  - Wood
+  - Water Ground
   layers:
   - Default
   - TransparentFX
@@ -13,11 +20,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Sinking Objects
+  - Floating Objects
+  - Ground
+  - Player
+  - Water Ground
   - 
   - 
   - 

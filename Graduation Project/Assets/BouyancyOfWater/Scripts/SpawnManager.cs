@@ -19,13 +19,15 @@ namespace BouyancyOfWater
         
         public Text spawnLimitTxt;
 
-        public GameObject atButton;
+        public GameObject woodButton;
+        public GameObject ironButton;
 
         public void SpawnObject(string objectType)
         {
             if(spawnLimit <= 1)
             {
-                atButton.SetActive(false);
+                woodButton.SetActive(false);
+                ironButton.SetActive(false);
             }
             if(objectType == "Wood")
             {

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2002459256427307458}
   - component: {fileID: 2002459256427307469}
   - component: {fileID: 2002459256427307468}
-  - component: {fileID: 2002459256427307471}
-  - component: {fileID: 2002459256427307459}
-  m_Layer: 0
+  - component: {fileID: 773250888219363184}
+  - component: {fileID: -697915388736939370}
+  - component: {fileID: -8742157323296994265}
+  m_Layer: 9
   m_Name: Wood
   m_TagString: Wood
   m_Icon: {fileID: 0}
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2002459256427307470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.21, y: 5.61, z: -0.47}
-  m_LocalScale: {x: 3.2203133, y: 0.44423, z: 3.0501165}
+  m_LocalScale: {x: 0.8915395, y: 0.22287999, z: 0.46852}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,32 +82,67 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2002459256427307471
-BoxCollider:
+--- !u!61 &773250888219363184
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002459256427307470}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.16571179}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2002459256427307459
-Rigidbody:
+  m_Size: {x: 1.0000001, y: 0.6685764}
+  m_EdgeRadius: 0
+--- !u!50 &-697915388736939370
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2002459256427307470}
-  serializedVersion: 2
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
   m_Mass: 1
-  m_Drag: 0
+  m_LinearDrag: 0.38
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_Constraints: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &-8742157323296994265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002459256427307470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3ea0975ea845142955080dd07250ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionForce: 15
+  waterInteractionForce: 0.07
+  interactionForceDirections:
+  - {x: -1, y: 0}
+  - {x: 1, y: 0}
