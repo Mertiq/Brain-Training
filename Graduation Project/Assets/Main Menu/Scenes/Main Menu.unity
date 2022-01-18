@@ -614,6 +614,7 @@ MonoBehaviour:
   images:
   - {fileID: 21300000, guid: a11224e81f8773441a7f9172f3eefdff, type: 3}
   - {fileID: 21300000, guid: ddd118c7cb98db44a92fe4ea18aa8b66, type: 3}
+  - {fileID: 21300000, guid: cd61b0485dee3004895e5c8fbf234943, type: 3}
 --- !u!114 &463118376
 MonoBehaviour:
   m_ObjectHideFlags: 0

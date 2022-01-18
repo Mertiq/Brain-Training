@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CashierGame/Scene/Cashier Game.unity
     guid: bb1e97c580094394a9c5ddf69728b8d6
+  - enabled: 1
+    path: Assets/ReflectionPuzzle/Scenes/Reflection Puzzle.unity
+    guid: 937699fb436e4fd41ba12668755521d6
   m_configObjects: {}
