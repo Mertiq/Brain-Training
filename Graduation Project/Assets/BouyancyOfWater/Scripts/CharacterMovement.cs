@@ -22,6 +22,7 @@ namespace BouyancyOfWater{
     void Update()
     {
          horizontalMovement = Input.GetAxisRaw("Horizontal") * speed;
+            Debug.Log(Input.GetAxisRaw("Horizontal"));
          if(Input.GetButtonDown("Jump"))
          {
              isJump = true;

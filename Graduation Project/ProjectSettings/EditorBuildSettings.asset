@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ReflectionPuzzle/Scenes/Reflection Puzzle.unity
     guid: 937699fb436e4fd41ba12668755521d6
+  - enabled: 1
+    path: Assets/BouyancyOfWater/Scenes/Bouyancy Of Water.unity
+    guid: 072f8acbed290be4bba4a5aaad8da9df
   m_configObjects: {}
