@@ -44,17 +44,11 @@ namespace BouyancyOfWater{
             Destroy(gameObject);
             Debug.Log("Game Over");
         }
-        else if(col.transform.tag == "FinishPoint")
+        else if(col.transform.tag == "Finish Point")
         {
             //gameOverPanel.SetActive(true);
         }
     }
-    void OnCollisionExit2D(Collision2D col)
-    {
-        if(col.transform.tag == "Ground" ||col.transform.tag == "Wood")
-        {
-           
-        }
-    }
+    
 }
 }
