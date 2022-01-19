@@ -11,6 +11,8 @@ TagManager:
   - Iron
   - Wood
   - Water Ground
+  - Ball
+  - Dot
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Ground
   - Player
   - Water Ground
-  - 
+  - Finish Point
   - 
   - 
   - 
