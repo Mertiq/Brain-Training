@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Bouyancy Of Water
   image: {fileID: 21300000, guid: c8ac6e8dcbcea8747a59d257b9360995, type: 3}
-  description: 
+  description: This game measures how you know the bouyancy of water
   category: 2

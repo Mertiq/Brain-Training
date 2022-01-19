@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Reflection Puzzle
   image: {fileID: 21300000, guid: d46493a2bdd66cf4eb448a4138f75833, type: 3}
-  description: 
+  description: Find the wrong reflection
   category: 2

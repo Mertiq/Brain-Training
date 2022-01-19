@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Settings : MonoBehaviour
+namespace MainMenu
 {
-    public void ChangeLanguage(Dropdown dropdown)
+    public class Settings : MonoBehaviour
     {
-
-        if (dropdown.options[dropdown.value].text == "English")
+        public void ChangeLanguage(Dropdown dropdown)
         {
-            LocalizationSystem.language = LocalizationSystem.Language.English;
-        }
-        else
-        {
-            LocalizationSystem.language = LocalizationSystem.Language.Turkce;
-        }
+
+            if (dropdown.options[dropdown.value].text == "English")
+            {
+                LocalizationSystem.language = LocalizationSystem.Language.English;
+            }
+            else
+            {
+                LocalizationSystem.language = LocalizationSystem.Language.Turkce;
+            }
 
 
+        }
     }
 }
