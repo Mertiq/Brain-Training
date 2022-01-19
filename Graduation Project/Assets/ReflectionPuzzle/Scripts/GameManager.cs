@@ -10,6 +10,8 @@ namespace ReflectionPuzzle
         [SerializeField] private int rows = 3;
         [SerializeField] private int cols = 3;
 
+        [SerializeField] private GameObject resultText;
+
         [SerializeField] private GameObject gridHolderReal;
         [SerializeField] private GameObject gridHolderReflection;
 
@@ -19,6 +21,9 @@ namespace ReflectionPuzzle
 
         private GridHolderController ghcReal;
         private GridHolderController ghcReflected;
+
+        private Text _resultText;
+        private Animator resultTextAnimator;
 
         private int placementShapeNumber = 0;
         private int[] randomTilesIndexes;
@@ -36,6 +41,8 @@ namespace ReflectionPuzzle
 
         private void Start()
         {
+            resultTextAnimator = resultText.GetComponent<Animator>();
+            _resultText = resultText.GetComponent<Text>();
             CreateGridHolders();
         }
 
@@ -57,7 +64,7 @@ namespace ReflectionPuzzle
                     shapeCount = 0;
 
                 randomTilesIndexes[i] = GetUniqueRandom();
-                ghcReal.CreateShape(randomTilesIndexes[i], shapes[shapeCount++]);         
+                ghcReal.CreateShape(randomTilesIndexes[i], shapes[shapeCount++], false);
             }
 
             PlaceReflectedShapes();
@@ -76,13 +83,13 @@ namespace ReflectionPuzzle
                 if (isWrongShapeSelected)
                 {
                     index = randomTilesIndexes[i];
-                    ghcReflected.CreateShape(index, shapes[shapeCount++]);
+                    ghcReflected.CreateShape(index, shapes[shapeCount++], true);
                 }
                 else
                 {
                     index = GetUniqueRandom();
                     isWrongShapeSelected = true;
-                    ghcReflected.CreateShapeWrong(index, shapes[shapeCount++]);
+                    ghcReflected.CreateWrongShape(index, shapes[shapeCount++]);
                 }
             }
         }      
@@ -116,20 +123,41 @@ namespace ReflectionPuzzle
         {
             ghcReflected.DestroyInstantiatedShapes();
             ghcReal.DestroyInstantiatedShapes();
-
-            isWrongShapeSelected = false;
-
-
-            point += 10;
-            pointText.text = point.ToString();
-
             PlaceShapes();
+        }
+
+        public void RightSelected()
+        {
+            isWrongShapeSelected = false;
+            point += 10;
+            pointText.text = "Point: " + point.ToString();
+            _resultText.color = Color.green;
+            _resultText.text = "You Right Congrats.";
+            StartCoroutine(WaitForNextLevel());
         }
 
         public void WrongSelected()
         {
+            
             point -= 10;
-            pointText.text = point.ToString();
+            pointText.text = "Point: " + point.ToString();
+            _resultText.color = Color.red;
+            _resultText.text = "You Select Wrong.";
+            StartCoroutine(WaitForNextLevel());
+        }
+
+        private IEnumerator WaitForNextLevel()
+        {
+            ghcReal.DisableButtons();
+            ghcReflected.DisableButtons();
+            resultText.SetActive(true);
+            resultTextAnimator.SetBool("resultParam", true);
+
+            yield return new WaitForSeconds(1f);
+
+            resultTextAnimator.SetBool("resultParam", false);
+            resultText.SetActive(false);
+            NextLevel();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace MainMenu
 
         public void MainMenu()
         {
+            Screen.orientation = ScreenOrientation.Portrait;
             SceneManager.LoadScene("Main Menu");
         }
     }
