@@ -17,9 +17,8 @@ namespace ReflectionPuzzle
 
         public void UserSelectShape()
         {
-            Debug.Log("alo");
             if (isWrongReflect)
-                gm.NextLevel();
+                gm.RightSelected();
             else
                 gm.WrongSelected();
         }
