@@ -21,13 +21,18 @@ namespace BouyancyOfWater{
 
         void Update()
         {
-            horizontalMovement = Input.GetAxisRaw("Horizontal") * speed;
-            if(Input.GetButtonDown("Jump"))
-            {
-                isJump = true;
-            }
+            // horizontalMovement = Input.GetAxisRaw("Horizontal") * speed;
+            // if(Input.GetButtonDown("Jump"))
+            // {
+            //     isJump = true;
+            // }
         }
-    
+        public void Move(int direction) {
+            horizontalMovement = direction * speed;
+        }
+        public void Jump() {
+            isJump = true;
+        }
         void FixedUpdate()
         {
             controller.Move(horizontalMovement * Time.fixedDeltaTime,false, isJump);
