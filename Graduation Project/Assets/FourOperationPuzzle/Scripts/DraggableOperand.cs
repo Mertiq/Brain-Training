@@ -45,7 +45,6 @@ namespace FourOperations {
                 startAnchoredPosition = rectTransform.anchoredPosition;
                 canvasGroup.alpha = .6f;
                 canvasGroup.blocksRaycasts = false;
-                Debug.Log("OnBeginDrag");
             }
             
         }

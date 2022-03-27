@@ -52,7 +52,6 @@ namespace FourOperations{
                 eventData.pointerDrag.GetComponent<DraggableOperand>().SetIsPlaced(true);
                 placedGuessOperand = eventData.pointerDrag;
                 this.SetGuessedOperand(eventData.pointerDrag.GetComponent<DraggableOperand>().GetValue());
-                Debug.Log("OnDrop");
                 onDrop?.Invoke();
             }
         }

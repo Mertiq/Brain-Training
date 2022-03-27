@@ -14,6 +14,8 @@ namespace FourOperations {
     public class OperationsControlManager : MonoBehaviour {
         public OperationMap[] operations = new OperationMap[4];
         public DraggableOperand[] draggableOperands = new DraggableOperand[3];
+        public EndGamePanelController endGamePanelController;
+
         public void InitalizeOperations() {
             Operation firstOp = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
             Operation secondOp = GetOperation(OperationIndex.BOTTOM_TO_RIGHT);
@@ -96,8 +98,12 @@ namespace FourOperations {
 
                 if(first.GetIsCorrectlyGuessed() && second.GetIsCorrectlyGuessed() && third.GetIsCorrectlyGuessed() && fourth.GetIsCorrectlyGuessed() ){
                     Debug.Log("You win!");
+                    endGamePanelController.SetEndGameText("You win!");
+                    endGamePanelController.gameObject.SetActive(true);
                 }else{
                     Debug.Log("You lost!");
+                    endGamePanelController.SetEndGameText("You lost!");
+                    endGamePanelController.gameObject.SetActive(true);
                 }
             }
         }
