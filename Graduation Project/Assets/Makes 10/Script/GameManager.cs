@@ -6,16 +6,19 @@ namespace Makes10
 	public class GameManager : MonoBehaviour
 	{
 		//choosen Ball gameObjects
-		GameObject firstBallObject = null;
-		GameObject secondBallObject = null;
+		[SerializeField] private GameObject firstBallObject = null;
+		[SerializeField] private GameObject secondBallObject = null;
 
 		//choosen Balls
-		Ball firstBall = null;
-		Ball secondBall = null;
+		[SerializeField] private Ball firstBall = null;
+		[SerializeField] private Ball secondBall = null;
 
-		int clickCounter;
-		bool canClick = true;
+		[SerializeField] private int clickCounter;
+		[SerializeField] private bool canClick = true;
 
+		public delegate void OnScoreChange(float score);
+		public static event OnScoreChange onScoreChange;
+		
 		private void Update()
 		{
 			if (canClick)
@@ -59,12 +62,14 @@ namespace Makes10
 			}
 		}
 
-		void Control()
+		private void Control()
 		{
 			if (firstBall.number + secondBall.number == 10)
 			{
 				Destroy(firstBallObject);
 				Destroy(secondBallObject);
+				ScoreManager.score += 10;
+				onScoreChange(ScoreManager.score);
 			}
 			canClick = true;
 			firstBall.GlowCirleSetActive(false);

@@ -11,18 +11,25 @@ namespace MemoryMatchingGame
 
 		//choosen Cards
 		Card firstCard = null;
-		Card secondCard = null;
+		private Card secondCard = null;
 
-		int clickCounter;
-		bool canClick = true;
+		private int clickCounter;
+		private bool canClick = true;
 
-		List<GameObject> cards = new List<GameObject>();
-		 
+		readonly List<GameObject> cards = new List<GameObject>();
+
+		[SerializeField] private bool isGameEnd;
+		
+		public delegate void GameEnd ();
+		public static event GameEnd OnGameEnd;    
+		
+		public static int collectedCardsCount = 0;
+		
 		private void Start()
 		{
-			GameObject cardsParent = GameObject.Find("Cards");
+			var cardsParent = GameObject.Find("Cards");
 
-			for (int i = 0; i < cardsParent.transform.childCount; i++)
+			for (var i = 0; i < cardsParent.transform.childCount; i++)
 			{
 				cards.Add(cardsParent.transform.GetChild(i).gameObject);
 			}
@@ -31,55 +38,51 @@ namespace MemoryMatchingGame
 
 		private void FixedUpdate()
 		{
-			if (canClick)
+			if (isGameEnd)
 			{
-				if (Input.GetMouseButtonDown(0))
-				{
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-					RaycastHit hit;
+				OnGameEnd?.Invoke();
+				isGameEnd = !isGameEnd;
+			}
 
-					if (Physics.Raycast(ray, out hit, 100))
-					{
-						if (clickCounter == 0)
-						{
-							//assign card
-							firstCardObject = hit.collider.gameObject;
-							firstCard = firstCardObject.GetComponent<Card>();
-                            if (firstCard.clickable)
-                            {
-								//turn card
-								firstCardObject.GetComponent<Animator>().SetBool("turn", true);
+			if (!canClick) return;
+			if (!Input.GetMouseButtonDown(0)) return;
+			if (Camera.main == null) return;
+			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-								clickCounter++;
-								firstCard.clickable = false;
-							}
-						}
-						else
-						{
-							//assign card
-							secondCardObject = hit.collider.gameObject;
-							secondCard = secondCardObject.GetComponent<Card>();
+			if (!Physics.Raycast(ray, out var hit, 100)) return;
+			if (clickCounter == 0)
+			{
+				//assign card
+				firstCardObject = hit.collider.gameObject;
+				firstCard = firstCardObject.GetComponent<Card>();
+				if (!firstCard.clickable) return;
+				//turn card
+				firstCardObject.GetComponent<Animator>().SetBool("turn", true);
 
-							if (secondCard.clickable)
-							{
-								//turn card
-								secondCardObject.GetComponent<Animator>().SetBool("turn", true);
+				clickCounter++;
+				firstCard.clickable = false;
+			}
+			else
+			{
+				//assign card
+				secondCardObject = hit.collider.gameObject;
+				secondCard = secondCardObject.GetComponent<Card>();
 
-								canClick = false;
+				if (!secondCard.clickable) return;
+				//turn card
+				secondCardObject.GetComponent<Animator>().SetBool("turn", true);
 
-								//check card
-								Invoke("Control", 1.8f);
+				canClick = false;
 
-								clickCounter = 0;
-								secondCard.clickable = false;
-							}
-						}
-					}
-				}
+				//check card
+				Invoke(nameof(Control), 1.8f);
+
+				clickCounter = 0;
+				secondCard.clickable = false;
 			}
 		}
 
-		void Control()
+		private void Control()
 		{
 			if (firstCard.cardType == secondCard.cardType)
 			{
@@ -90,10 +93,13 @@ namespace MemoryMatchingGame
 
 				firstCard.particleSystem.Play();
 				secondCard.particleSystem.Play();
-				ScoreManager.IncreaseScore();
+				collectedCardsCount += 2;
 
-				//win check
-				//	Debug.Log("win");
+				if (collectedCardsCount >= 20)
+				{
+					isGameEnd = true;
+					OnGameEnd?.Invoke();
+				}
 			}
 			else
 			{

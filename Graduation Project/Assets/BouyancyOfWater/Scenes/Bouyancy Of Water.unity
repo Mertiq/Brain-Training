@@ -1484,7 +1484,7 @@ PrefabInstance:
     - target: {fileID: 2032879574208897424, guid: 86e96d1ff1d4a1d41bed6aea0e6c58fd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2032879574208897424, guid: 86e96d1ff1d4a1d41bed6aea0e6c58fd,
         type: 3}
@@ -1737,7 +1737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c91a5d1babb6848b2b067dfafca361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endGamePanel: {fileID: 0}
+  endGamePanel: {fileID: 1167378181}
   speed: 20
 --- !u!1 &1203831031
 GameObject:
@@ -2335,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 322994319872530369, guid: 6c0d56bdd78a8ac4eba28e774f3c0dc7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 322994319872530369, guid: 6c0d56bdd78a8ac4eba28e774f3c0dc7,
         type: 3}
