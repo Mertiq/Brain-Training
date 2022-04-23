@@ -14,9 +14,9 @@ namespace MemoryMatchingGame
 		private Card secondCard = null;
 
 		private int clickCounter;
-		private bool canClick = true;
+		[SerializeField] private bool canClick = true;
 
-		readonly List<GameObject> cards = new List<GameObject>();
+		readonly List<GameObject> cards = new List<GameObject>();	
 
 		[SerializeField] private bool isGameEnd;
 		

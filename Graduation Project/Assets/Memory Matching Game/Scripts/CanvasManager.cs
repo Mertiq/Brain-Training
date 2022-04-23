@@ -15,7 +15,6 @@ namespace MemoryMatchingGame
         [SerializeField] private GameObject endGamePanel;
         [SerializeField] private SaveSystem saveSystem;
         
-        
         private void Update()
         {
             collectedCardsText.text = GameManager.collectedCardsCount + "/20";

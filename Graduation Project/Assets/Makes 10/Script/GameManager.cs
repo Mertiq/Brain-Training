@@ -15,9 +15,16 @@ namespace Makes10
 
 		[SerializeField] private int clickCounter;
 		[SerializeField] private bool canClick = true;
-
-		public delegate void OnScoreChange(float score);
-		public static event OnScoreChange onScoreChange;
+		
+		[SerializeField] private bool isGameEnd;
+		[SerializeField] public static int score;
+		[SerializeField] private int gameEndTime;
+		
+		
+		public delegate void GameEnd ();
+		public static event GameEnd OnGameEnd;  
+		public delegate void ScoreChanged(int score);
+		public static event ScoreChanged OnScoreChanged;
 		
 		private void Update()
 		{
@@ -25,10 +32,9 @@ namespace Makes10
 			{
 				if (Input.GetMouseButtonDown(0))
 				{
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-					RaycastHit hit;
+					var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-					if (Physics.Raycast(ray, out hit, 100))
+					if (Physics.Raycast(ray, out var hit, 100))
 					{
 						// Ball objects have Ball tag
 						if (hit.collider.CompareTag("Ball"))
@@ -60,6 +66,10 @@ namespace Makes10
 					}
 				}
 			}
+			
+			if (!(Timer.currentTime >= gameEndTime)) return;
+			isGameEnd = true;
+			OnGameEnd?.Invoke();
 		}
 
 		private void Control()
@@ -68,8 +78,13 @@ namespace Makes10
 			{
 				Destroy(firstBallObject);
 				Destroy(secondBallObject);
-				ScoreManager.score += 10;
-				onScoreChange(ScoreManager.score);
+				score += 10;
+				OnScoreChanged?.Invoke(score);
+			}
+			else
+			{
+				score -= 10;
+				OnScoreChanged?.Invoke(score);
 			}
 			canClick = true;
 			firstBall.GlowCirleSetActive(false);

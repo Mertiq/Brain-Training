@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MemoryMatchingGame;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,19 @@ namespace Makes10
     
     public class CanvasManager : MonoBehaviour
     {
-        [SerializeField] private Text timeText;
-        [SerializeField] private Text scoreText;
-
-        public Text TimeText
+        [SerializeField] private TextMeshProUGUI timeText;
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private GameObject endGamePanel;
+        [SerializeField] private Text newScoreText;
+        [SerializeField] private Text highScoreText;
+        [SerializeField] private SaveSystem saveSystem;
+        public TextMeshProUGUI TimeText
         {
             get => timeText;
             set => timeText = value;
         }
 
-        public Text ScoreText
+        public TextMeshProUGUI ScoreText
         {
             get => scoreText;
             set => scoreText = value;
@@ -48,20 +52,28 @@ namespace Makes10
             }
             
         }
+        private void ShowEndGamePanel()
+        {
+            endGamePanel.SetActive(true);
+            highScoreText.text = saveSystem.LoadHighScore().ToString();
+            newScoreText.text = saveSystem.NewScore.ToString();
+        }
         
-        private void SetScore(float score)
+        private void SetScoreText(int score)
         {
             scoreText.text = score.ToString();
         }
 
         private void OnEnable()
         {
-            GameManager.onScoreChange += SetScore;
+            GameManager.OnScoreChanged += SetScoreText;
+            SaveSystem.OnScoreSaved += ShowEndGamePanel;
         }
 
         private void OnDisable()
         {
-            GameManager.onScoreChange -= SetScore;
+            GameManager.OnScoreChanged -= SetScoreText;
+            SaveSystem.OnScoreSaved -= ShowEndGamePanel;
         }
     }
 }
