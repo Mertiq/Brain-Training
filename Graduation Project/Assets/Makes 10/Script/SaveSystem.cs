@@ -1,32 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Makes10
+namespace Makes_10.Script
 {
     public class SaveSystem : MonoBehaviour
     {
-        [SerializeField] private float highScore;
-
-        private void Start()
+        [SerializeField] private string gameName;
+        [SerializeField] private float newScore;
+        
+        public float NewScore
         {
-            highScore = PlayerPrefs.GetFloat("makes10highscore");
+            get => newScore;
+            set => newScore = value;
+        }
+        
+        public delegate void ScoreSaved ();
+        public static event ScoreSaved OnScoreSaved;    
+        
+        private void SaveNewScore()
+        {
+            newScore = GameManager.score;
+            if (newScore > LoadHighScore())
+            {
+                SaveHighScore(newScore);
+            }
+            OnScoreSaved?.Invoke();
         }
 
-        public void Save()
+        public float LoadHighScore()
         {
-            float newScore = ScoreManager.score;
-            ScoreManager.score = 0;
-            if (newScore < highScore)
-            {
-                PlayerPrefs.SetFloat("makes10highscore", newScore);
-                highScore = PlayerPrefs.GetFloat("makes10highscore");
-                //yeni higscore
-            }
-            else
-            {
-                //olmadı
-            }
+            return PlayerPrefs.GetFloat(gameName);
+        }
+
+        private void SaveHighScore(float highScore)
+        {
+            PlayerPrefs.SetFloat(gameName,highScore);
+        }
+
+        private void OnEnable()
+        {
+            GameManager.OnGameEnd += SaveNewScore;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGameEnd -= SaveNewScore;
         }
     }
 }

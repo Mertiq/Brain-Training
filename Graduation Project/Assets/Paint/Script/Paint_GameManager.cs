@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Paint_GameManager : MonoBehaviour
@@ -27,18 +28,18 @@ public class Paint_GameManager : MonoBehaviour
 		playerBoard = GameObject.Find("PlayerBoard");
 
 		// add all ai dots into dots list
-		for (int i = 0; i < AIBoard.transform.childCount; i++)
+		for (var i = 0; i < AIBoard.transform.childCount; i++)
 		{
-			for (int j = 0; j < AIBoard.transform.GetChild(i).childCount; j++)
+			for (var j = 0; j < AIBoard.transform.GetChild(i).childCount; j++)
 			{
 				dots.Add(AIBoard.transform.GetChild(i).GetChild(j).gameObject);
 			}
 		}
 
 		// make all player board's dots paintable
-		for (int i = 0; i < playerBoard.transform.childCount; i++)
+		for (var i = 0; i < playerBoard.transform.childCount; i++)
 		{
-			for (int j = 0; j < playerBoard.transform.GetChild(i).childCount; j++)
+			for (var j = 0; j < playerBoard.transform.GetChild(i).childCount; j++)
 			{
 				playerBoard.transform.GetChild(i).GetChild(j).gameObject.GetComponent<Paint_Dot>().paintable = true;
 			}
@@ -49,7 +50,7 @@ public class Paint_GameManager : MonoBehaviour
 
 	void PaintTheAIBoard()
 	{
-        //Resources dosyasından bölümleri çekiyor
+		//Resources dosyasından bölümleri çekiyor
         //colors = levelGenerator.GenerateLevel(levelCount);
         //for (int i = 0; i < dots.Count; i++)
         //{
@@ -61,78 +62,63 @@ public class Paint_GameManager : MonoBehaviour
         //	}
         //}
 
-        foreach (GameObject dot in dots)
+        foreach (var dot in dots.Where(dot => PaintOrNot()))
         {
-            if (PaintOrNot())
-            {
-                dot.GetComponent<SpriteRenderer>().color = colors[Random.Range(0, 3)];
-                paintedDotCount++;
-            }
+	        dot.GetComponent<SpriteRenderer>().color = colors[Random.Range(0, 3)];
+	        paintedDotCount++;
         }
-    }
+	}
 
-	bool PaintOrNot()
+	private static bool PaintOrNot()
 	{
-		if(Random.Range(0, 2) == 0)
-			return true;
-		else
-			return false;
+		return Random.Range(0, 2) == 0;
 	}
 
 	private void Update()
 	{
 		SetSelectedColor();
-		if (Input.GetMouseButtonDown(0))
+		if (!Input.GetMouseButtonDown(0)) return;
+		var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		if (!Physics.Raycast(ray, out var hit, 100)) return;
+		GameObject clickedDot = null;
+
+		if (hit.collider.CompareTag("Dot"))
+			clickedDot = hit.collider.gameObject;
+		else if (hit.collider.CompareTag("Color"))
+			selectedColor = hit.collider.gameObject.GetComponent<SpriteRenderer>().color;
+		else
+			return;
+
+		if (clickedDot == null) return;
+		if (!clickedDot.GetComponent<Paint_Dot>().paintable) return;
+		clickedDot.GetComponent<SpriteRenderer>().color = selectedColor;
+
+		if (!clickedDot.GetComponent<Paint_Dot>().painted)
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-
-			if (Physics.Raycast(ray, out hit, 100))
+			if (selectedColor != Color.white)
 			{
-				GameObject clickedDot = null;
-
-				if (hit.collider.CompareTag("Dot"))
-					clickedDot = hit.collider.gameObject;
-				else if (hit.collider.CompareTag("Color"))
-					selectedColor = hit.collider.gameObject.GetComponent<SpriteRenderer>().color;
-				else
-					return;
-
-				if (clickedDot != null)
-				{
-					if (clickedDot.GetComponent<Paint_Dot>().paintable)
-					{
-						clickedDot.GetComponent<SpriteRenderer>().color = selectedColor;
-
-						if (!clickedDot.GetComponent<Paint_Dot>().painted)
-						{
-							if (selectedColor != Color.white)
-							{
-								paintedDotCount--;
-								clickedDot.GetComponent<Paint_Dot>().painted = true;
-							}
-						}
-						else
-						{
-							if (selectedColor == Color.white)
-							{
-								paintedDotCount++;
-								clickedDot.GetComponent<Paint_Dot>().painted = false;
-							}
-						}
-
-						if (paintedDotCount == 0)
-						{
-							//check board
-							Invoke("Control", .5f);
-						}
-					}
-				}
+				paintedDotCount--;
+				clickedDot.GetComponent<Paint_Dot>().painted = true;
 			}
+		}
+		else
+		{
+			if (selectedColor == Color.white)
+			{
+				paintedDotCount++;
+				clickedDot.GetComponent<Paint_Dot>().painted = false;
+			}
+		}
+
+		if (paintedDotCount == 0)
+		{
+			//check board
+			Invoke("Control", .5f);
 		}
 	}
 
-	void Control()
+	private void Control()
 	{
 		for (int i = 0; i < AIBoard.transform.childCount; i++)
 		{
@@ -148,12 +134,12 @@ public class Paint_GameManager : MonoBehaviour
 		levelCount++;
 		NewLevel();
 	}
-	
-	void NewLevel()
+
+	private void NewLevel()
 	{
-		for (int i = 0; i < AIBoard.transform.childCount; i++)
+		for (var i = 0; i < AIBoard.transform.childCount; i++)
 		{
-			for (int j = 0; j < AIBoard.transform.GetChild(i).childCount; j++)
+			for (var j = 0; j < AIBoard.transform.GetChild(i).childCount; j++)
 			{
 				AIBoard.transform.GetChild(i).GetChild(j).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 				playerBoard.transform.GetChild(i).GetChild(j).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -163,30 +149,24 @@ public class Paint_GameManager : MonoBehaviour
 		PaintTheAIBoard();
 	}
 
-	void SetSelectedColor()
+	private void SetSelectedColor()
     {
 		foreach (var item in colorPalettes)
 		{
-			if (item.name == ColorToString(selectedColor))
-				item.SetActive(true);
-			else
-				item.SetActive(false);
+			item.SetActive(item.name == ColorToString(selectedColor));
 		}
 	}
 
-	string ColorToString(Color color)
+	private static string ColorToString(Color color)
     {
 		if (color == Color.red)
 			return "red";
-		else if (color == Color.blue)
+	    if (color == Color.blue)
 			return "blue";
-		else if (color == Color.green)
+		if (color == Color.green)
 			return "green";
-		else if (color == Color.white)
-			return "white";
-		else
-			return "";
-	}
+		return color == Color.white ? "white" : "";
+    }
 
 }
 
