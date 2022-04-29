@@ -1818,7 +1818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c91a5d1babb6848b2b067dfafca361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endGamePanel: {fileID: 0}
+  endGamePanel: {fileID: 1167378181}
   speed: 20
 --- !u!1 &1203831031
 GameObject:

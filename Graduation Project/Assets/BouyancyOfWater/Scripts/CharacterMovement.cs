@@ -19,6 +19,11 @@ namespace BouyancyOfWater{
             controller = GetComponent<CharacterController2D>();
         }
 
+        private void Start()
+        {
+            Screen.orientation = ScreenOrientation.Landscape;
+        }
+
         void Update()
         {
             // horizontalMovement = Input.GetAxisRaw("Horizontal") * speed;
@@ -51,6 +56,7 @@ namespace BouyancyOfWater{
             }
             else if(col.transform.tag == "FinishPoint")
             {
+                Time.timeScale = 0;
                 endGamePanel.SetActive(true);
             }
         }

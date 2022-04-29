@@ -1,20 +1,35 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using UnityEngine;
 
-namespace Makes10
+namespace Makes_10.Script
 {
 	public class GameManager : MonoBehaviour
 	{
 		//choosen Ball gameObjects
-		GameObject firstBallObject = null;
-		GameObject secondBallObject = null;
+		[SerializeField] private GameObject firstBallObject = null;
+		[SerializeField] private GameObject secondBallObject = null;
 
 		//choosen Balls
-		Ball firstBall = null;
-		Ball secondBall = null;
+		[SerializeField] private Ball firstBall = null;
+		[SerializeField] private Ball secondBall = null;
 
-		int clickCounter;
-		bool canClick = true;
+		[SerializeField] private int clickCounter;
+		[SerializeField] private bool canClick = true;
+		
+		[SerializeField] private bool isGameEnd;
+		[SerializeField] public static int score;
+		[SerializeField] private int gameEndTime;
+		
+		
+		public delegate void GameEnd ();
+		public static event GameEnd OnGameEnd;  
+		public delegate void ScoreChanged(int score);
+		public static event ScoreChanged OnScoreChanged;
+
+		private void Start()
+		{
+			FindObjectOfType<AudioManager>().PlaySound("background");
+		}
 
 		private void Update()
 		{
@@ -22,26 +37,24 @@ namespace Makes10
 			{
 				if (Input.GetMouseButtonDown(0))
 				{
-					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-					RaycastHit hit;
+					var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-					if (Physics.Raycast(ray, out hit, 100))
+					if (Physics.Raycast(ray, out var hit, 100))
 					{
 						// Ball objects have Ball tag
 						if (hit.collider.CompareTag("Ball"))
 						{
 							if (clickCounter == 0)
 							{
-								//assign ball
+								FindObjectOfType<AudioManager>().PlaySound("pick ball");
 								firstBallObject = hit.collider.gameObject;
 								firstBall = firstBallObject.GetComponent<Ball>();
 								firstBall.GlowCirleSetActive(true);
-
 								clickCounter++;
 							}
 							else
 							{
-								//assign ball
+								FindObjectOfType<AudioManager>().PlaySound("pick ball");
 								secondBallObject = hit.collider.gameObject;
 								secondBall = secondBallObject.GetComponent<Ball>();
 								secondBall.GlowCirleSetActive(true);
@@ -57,14 +70,27 @@ namespace Makes10
 					}
 				}
 			}
+			
+			if (!(Timer.currentTime >= gameEndTime)) return;
+			isGameEnd = true;
+			OnGameEnd?.Invoke();
 		}
 
-		void Control()
+		private void Control()
 		{
 			if (firstBall.number + secondBall.number == 10)
 			{
+				FindObjectOfType<AudioManager>().PlaySound("correct match");
 				Destroy(firstBallObject);
 				Destroy(secondBallObject);
+				score += 10;
+				OnScoreChanged?.Invoke(score);
+			}
+			else
+			{
+				FindObjectOfType<AudioManager>().PlaySound("wrong match");
+				score -= 10;
+				OnScoreChanged?.Invoke(score);
 			}
 			canClick = true;
 			firstBall.GlowCirleSetActive(false);
