@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Makes10
+namespace Makes_10.Script
 {
     public class Timer : MonoBehaviour
     {

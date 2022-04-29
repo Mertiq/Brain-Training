@@ -58,6 +58,7 @@ namespace MemoryMatchingGame
 				if (!firstCard.clickable) return;
 				//turn card
 				firstCardObject.GetComponent<Animator>().SetBool("turn", true);
+				FindObjectOfType<AudioManager>().PlaySound("card flip front");
 
 				clickCounter++;
 				firstCard.clickable = false;
@@ -71,6 +72,7 @@ namespace MemoryMatchingGame
 				if (!secondCard.clickable) return;
 				//turn card
 				secondCardObject.GetComponent<Animator>().SetBool("turn", true);
+				FindObjectOfType<AudioManager>().PlaySound("card flip front");
 
 				canClick = false;
 
@@ -84,13 +86,17 @@ namespace MemoryMatchingGame
 
 		private void Control()
 		{
+			
+			firstCardObject.GetComponent<Animator>().SetBool("turn", false);
+			secondCardObject.GetComponent<Animator>().SetBool("turn", false);
+			FindObjectOfType<AudioManager>().PlaySound("card flip back");
+			FindObjectOfType<AudioManager>().PlaySound("card flip back");
 			if (firstCard.cardType == secondCard.cardType)
 			{
-				firstCardObject.GetComponent<Animator>().SetBool("turn", false);
-				secondCardObject.GetComponent<Animator>().SetBool("turn", false);
 				firstCardObject.GetComponent<Animator>().SetBool("collect", true);
 				secondCardObject.GetComponent<Animator>().SetBool("collect", true);
 
+				FindObjectOfType<AudioManager>().PlaySound("correct match");
 				firstCard.particleSystem.Play();
 				secondCard.particleSystem.Play();
 				collectedCardsCount += 2;
@@ -103,9 +109,7 @@ namespace MemoryMatchingGame
 			}
 			else
 			{
-				//turn card
-				firstCardObject.GetComponent<Animator>().SetBool("turn", false);
-				secondCardObject.GetComponent<Animator>().SetBool("turn", false);
+				FindObjectOfType<AudioManager>().PlaySound("wrong match");
 				firstCard.clickable = true;
 				secondCard.clickable = true;
 			}

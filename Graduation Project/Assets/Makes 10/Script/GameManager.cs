@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using UnityEngine;
 
-namespace Makes10
+namespace Makes_10.Script
 {
 	public class GameManager : MonoBehaviour
 	{
@@ -25,7 +25,12 @@ namespace Makes10
 		public static event GameEnd OnGameEnd;  
 		public delegate void ScoreChanged(int score);
 		public static event ScoreChanged OnScoreChanged;
-		
+
+		private void Start()
+		{
+			FindObjectOfType<AudioManager>().PlaySound("background");
+		}
+
 		private void Update()
 		{
 			if (canClick)
@@ -41,16 +46,15 @@ namespace Makes10
 						{
 							if (clickCounter == 0)
 							{
-								//assign ball
+								FindObjectOfType<AudioManager>().PlaySound("pick ball");
 								firstBallObject = hit.collider.gameObject;
 								firstBall = firstBallObject.GetComponent<Ball>();
 								firstBall.GlowCirleSetActive(true);
-
 								clickCounter++;
 							}
 							else
 							{
-								//assign ball
+								FindObjectOfType<AudioManager>().PlaySound("pick ball");
 								secondBallObject = hit.collider.gameObject;
 								secondBall = secondBallObject.GetComponent<Ball>();
 								secondBall.GlowCirleSetActive(true);
@@ -76,6 +80,7 @@ namespace Makes10
 		{
 			if (firstBall.number + secondBall.number == 10)
 			{
+				FindObjectOfType<AudioManager>().PlaySound("correct match");
 				Destroy(firstBallObject);
 				Destroy(secondBallObject);
 				score += 10;
@@ -83,6 +88,7 @@ namespace Makes10
 			}
 			else
 			{
+				FindObjectOfType<AudioManager>().PlaySound("wrong match");
 				score -= 10;
 				OnScoreChanged?.Invoke(score);
 			}

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using MemoryMatchingGame;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Makes10
+namespace Makes_10.Script
 {
     
     public class CanvasManager : MonoBehaviour

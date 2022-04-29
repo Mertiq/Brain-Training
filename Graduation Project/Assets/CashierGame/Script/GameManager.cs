@@ -15,6 +15,11 @@ namespace CashierGame
         [SerializeField] public static int score;
         [SerializeField] private int gameEndTime;
         
+        [SerializeField] private Product[] resourcesProducts;
+        [SerializeField] private CanvasManager canvasManager;
+        [SerializeField] private List<Sprite> customerPhotos;
+        
+        
         
         public delegate void GameEnd ();
         public static event GameEnd OnGameEnd;    
@@ -22,6 +27,8 @@ namespace CashierGame
         public static event ScoreChanged OnScoreChanged; 
         private void Start()
         {
+            canvasManager = GetComponent<CanvasManager>();
+            resourcesProducts = Resources.LoadAll<Product>("Cashier Game/Products");
             FindObjectOfType<AudioManager>().PlaySound("bg");
             CreateNewLevel();
         }
@@ -35,26 +42,28 @@ namespace CashierGame
 
         private void CreateNewLevel()
         {
+            canvasManager.SetCustomerPhoto(customerPhotos[UnityEngine.Random.Range(0, customerPhotos.Count)]);
+            canvasManager.SetProductPricesToZero();
             change = 0;
-            float tempTotalProductPrice = 0;
-
-            var tempProductPrices = new List<float>();
-
+            
+            float totalCost = 0;
+            
             var rand = UnityEngine.Random.Range(1, 4);
             for (var i = 0; i < rand; i++)
             {
-                var price = UnityEngine.Random.Range(1, 20);
-                tempProductPrices.Add(price);
-                tempTotalProductPrice += tempProductPrices[i];
                 FindObjectOfType<AudioManager>().PlaySound("barcode reader");
+                
+                var product = resourcesProducts[UnityEngine.Random.Range(0, resourcesProducts.Length)];
+                canvasManager.SetProductText(i, product.ProductName, product.ProductPrice);
+                
+                totalCost += product.ProductPrice;
+                
             }
+            
+            customerMoney = Roll(UnityEngine.Random.Range(totalCost+.25f, totalCost * 2.2f));
 
-            var tempCustomerMoney = UnityEngine.Random.Range(tempTotalProductPrice+.25f, tempTotalProductPrice * 2.2f);
-            tempCustomerMoney = Roll(tempCustomerMoney);
-            totalProductPrice = tempTotalProductPrice;
-            customerMoney = tempCustomerMoney;
-
-            GetComponent<CanvasManager>().SetTexts(tempProductPrices, totalProductPrice, customerMoney, change);
+            canvasManager.SetTotalText(totalCost,customerMoney);
+            totalProductPrice = totalCost;
         }
 
         private static float Roll(float a)
@@ -74,6 +83,7 @@ namespace CashierGame
             if (totalProductPrice + change != customerMoney)
             {
                 FindObjectOfType<AudioManager>().PlaySound("pay fail");
+                DeleteChange();
                 score -= 10;
                 OnScoreChanged?.Invoke(score);
                 return;

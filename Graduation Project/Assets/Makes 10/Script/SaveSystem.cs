@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Makes10
+namespace Makes_10.Script
 {
     public class SaveSystem : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
- 
-namespace Makes10
+
+namespace Makes_10.Script
 {
 	public class BallThrower : MonoBehaviour
 	{
@@ -21,15 +21,14 @@ namespace Makes10
 		private void Update()
 		{
 			timeCounter += Time.deltaTime;
-			if (timeCounter > 1)
-			{
-				ThrowBall();
-				timeCounter = 0;
-			}
+			if (!(timeCounter > 1)) return;
+			ThrowBall();
+			timeCounter = 0;
 		}
 
-		void ThrowBall()
+		private void ThrowBall()
 		{
+			FindObjectOfType<AudioManager>().PlaySound("ball generate");
 			ballThrower = ballThrowersParent.transform.GetChild(Random.Range(0, 4));
 			if (ballThrower.transform.childCount <= 4)
 			{
