@@ -62,7 +62,7 @@ namespace Makes_10.Script
 								canClick = false;
 
 								//check ball
-								Invoke("Control", .5f);
+								Invoke(nameof(Control), .5f);
 
 								clickCounter = 0;
 							}
