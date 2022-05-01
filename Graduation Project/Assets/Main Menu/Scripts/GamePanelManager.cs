@@ -26,15 +26,13 @@ namespace MainMenu
                 Destroy(cardContainer.transform.GetChild(i).gameObject);
             }
 
-            int counter = 0;
+            var counter = 0;
             foreach (var game in games)
             {
-                if(game.category == category)
-                {
-                    gameCard.GetComponent<GameCard>().SetGameCard(game._name, game.description, game.image);
-                    Instantiate(gameCard, cardContainer.transform);
-                    counter++;
-                }
+                if (game.category != category) continue;
+                gameCard.GetComponent<GameCard>().SetGameCard(game._name, game.description, game.image);
+                Instantiate(gameCard, cardContainer.transform);
+                counter++;
             }
             SetCardContainerOffset(counter);
         }

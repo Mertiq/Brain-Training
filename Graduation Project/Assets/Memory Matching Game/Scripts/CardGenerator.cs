@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace MemoryMatchingGame
@@ -7,20 +8,18 @@ namespace MemoryMatchingGame
 	{
 		Sprite[] resourcesCards;
 		Sprite[] resourcesCardNamesEnglish;
-		Sprite[] resourcesCardNamesTurkce;
 
 		List<Sprite> cardSpritesList1 = new List<Sprite>();
 		List<Sprite> cardSpritesList2 = new List<Sprite>();
 
-		GameObject cardsParentObject;
+		private GameObject cardsParentObject;
 		private void Awake()
 		{
 			// Resources/Card directory
 			resourcesCards = Resources.LoadAll<Sprite>("Memory Matching Game/Cards");
 			resourcesCardNamesEnglish = Resources.LoadAll<Sprite>("Memory Matching Game/CardNames/English");
-			resourcesCardNamesTurkce = Resources.LoadAll<Sprite>("Memory Matching Game/CardNames/Turkce");
 
-			foreach (Sprite item in resourcesCards)
+			foreach (var item in resourcesCards)
 			{
 				cardSpritesList1.Add(item);
 				cardSpritesList2.Add(item);
@@ -32,11 +31,11 @@ namespace MemoryMatchingGame
 			GenerateCards(cardSpritesList1.Count);
 		}
 
-		void GenerateCards(int count)
+		private void GenerateCards(int count)
 		{
-			for (int i = 0; i < count; i++)
+			for (var i = 0; i < count; i++)
 			{
-				int rand = Random.Range(0, cardSpritesList1.Count);
+				var rand = Random.Range(0, cardSpritesList1.Count);
 
 				while (cardSpritesList1[rand] == null)
 				{
@@ -49,9 +48,9 @@ namespace MemoryMatchingGame
 
 			}
 
-			for (int i = count; i < count * 2; i++)
+			for (var i = count; i < count * 2; i++)
 			{
-				int rand = Random.Range(0, cardSpritesList2.Count);
+				var rand = Random.Range(0, cardSpritesList2.Count);
 
 				while (cardSpritesList2[rand] == null)
 				{
@@ -65,30 +64,10 @@ namespace MemoryMatchingGame
 			}
 		}
 
-		Sprite GetCardName(string name)
-        {
-			if(LocalizationSystem.language == LocalizationSystem.Language.English)
-            {
-				foreach (var cardName in resourcesCardNamesEnglish)
-				{
-					if (cardName.name == name)
-					{
-						return cardName;
-					}
-				}
-			}
-			if (LocalizationSystem.language == LocalizationSystem.Language.Turkce)
-			{
-				foreach (var cardName in resourcesCardNamesTurkce)
-				{
-					if (cardName.name == name)
-					{
-						return cardName;
-					}
-				}
-			}
-			return null;
-        }
+		private Sprite GetCardName(string name)
+		{
+			return resourcesCardNamesEnglish.FirstOrDefault(cardName => cardName.name == name);
+		}
 	}
 }
 

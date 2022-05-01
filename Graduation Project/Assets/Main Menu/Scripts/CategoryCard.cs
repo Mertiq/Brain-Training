@@ -9,7 +9,9 @@ namespace MainMenu
     {
         MATH,
         MEMORY,
-        PHYSICS
+        PHYSICS,
+        ART,
+        LANGUAGE
     }
 
 

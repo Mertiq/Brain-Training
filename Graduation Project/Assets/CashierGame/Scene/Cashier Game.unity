@@ -2186,7 +2186,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
   - name: bg
     audioClip: {fileID: 8300000, guid: a375aaeec4118784c8fbc6f608f930cb, type: 3}
-    volume: 0.67
+    volume: 0.266
     loop: 1
     audioSource: {fileID: 0}
 --- !u!4 &873037144
