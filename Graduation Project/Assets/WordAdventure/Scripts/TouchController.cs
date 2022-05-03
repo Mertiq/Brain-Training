@@ -5,7 +5,7 @@ using System;
 
 namespace WordAdventure
 {
-    public enum TouchDirection { Right, Left, Up, Down, Tapped};
+    public enum TouchDirection { Right, Left, Up, Down, Tapped };
 
     public class TouchController : MonoBehaviour
     {
@@ -19,26 +19,26 @@ namespace WordAdventure
 
         void Update()
         {
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
             {
                 theTouch = Input.GetTouch(0);
 
-                if(theTouch.phase == TouchPhase.Began)
+                if (theTouch.phase == TouchPhase.Began)
                 {
                     touchStartPos = theTouch.position;
                 }
-                else if(theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended)
+                else if (theTouch.phase == TouchPhase.Moved || theTouch.phase == TouchPhase.Ended)
                 {
                     touchEndPos = theTouch.position;
 
                     float x = touchEndPos.x - touchStartPos.x;
                     float y = touchEndPos.y - touchStartPos.y;
 
-                    if(Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
+                    if (Mathf.Abs(x) == 0 && Mathf.Abs(y) == 0)
                     {
                         direction = TouchDirection.Tapped;
                     }
-                    else if(Mathf.Abs(x) > Mathf.Abs(y))
+                    else if (Mathf.Abs(x) > Mathf.Abs(y))
                     {
                         direction = x > 0 ? TouchDirection.Right : TouchDirection.Left;
                     }
