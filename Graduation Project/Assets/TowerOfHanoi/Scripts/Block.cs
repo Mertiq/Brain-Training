@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace TowerOfHanoi
@@ -6,6 +7,7 @@ namespace TowerOfHanoi
     public class Block : MonoBehaviour
     {
         public BlockData blockData;
+        private Stick currentStick;
 
         private SpriteRenderer spriteRenderer;
         private Vector3 lastPosition;
@@ -14,7 +16,7 @@ namespace TowerOfHanoi
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.color = blockData.Color;
-            blockData.isOnAbove = true;
+            FindCurrentStick();
         }
 
         public void OnFingerDown()
@@ -32,10 +34,11 @@ namespace TowerOfHanoi
 
                 if (collider.TryGetComponent<Stick>(out stick))
                 {
-                    if (stick.topBlock && stick.topBlock.blockData.size > blockData.size)
+                    if (stick.topBlock == null || stick.topBlock.blockData.size > blockData.size)
                     {
-                        Debug.Log("sea");
-                        return;                    }
+                        PlaceBlock(stick);
+                        return;
+                    }
                     else
                     {
                         ResetPosition();
@@ -45,6 +48,25 @@ namespace TowerOfHanoi
             }
 
             ResetPosition();
+        }
+
+        private void FindCurrentStick()
+        {
+            Collider2D[] targetObject = Physics2D.OverlapPointAll(transform.position);
+            foreach (Collider2D collider in targetObject)
+            {
+                if (collider.TryGetComponent<Stick>(out Stick stick))
+                {
+                    currentStick = stick;
+                }
+            }
+        }
+
+        private void PlaceBlock(Stick stick)
+        {
+            currentStick.RemoveBlock(this);
+            stick.AddBlock(this);
+            currentStick = stick;
         }
 
         private void ResetPosition()

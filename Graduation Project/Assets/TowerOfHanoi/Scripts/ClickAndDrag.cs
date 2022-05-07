@@ -38,8 +38,11 @@ namespace TowerOfHanoi
 
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    selectedBlock.OnFingerUp();
-                    selectedBlock = null;
+                    if (selectedBlock)
+                    {
+                        selectedBlock.OnFingerUp();
+                        selectedBlock = null;
+                    }
                 }
 
                 if (selectedBlock)
