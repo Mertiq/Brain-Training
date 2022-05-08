@@ -11,10 +11,9 @@ namespace TowerOfHanoi
         private float blockPosY = -2.54f;
         private float yIntervalPerBlock = 0.7f;
 
-        public int blockCount;
-        public Block topBlock;
-
-        private List<Block> blocks;
+        [HideInInspector] public int blockCount;
+        [HideInInspector] public Block topBlock;
+        [HideInInspector] public List<Block> blocks;
 
         private void Start()
         {
@@ -57,7 +56,6 @@ namespace TowerOfHanoi
                 }
 
                 topBlock = topB;
-                Debug.Log("sea");
                 topBlock.blockData.isOnAbove = true;
             }
             else

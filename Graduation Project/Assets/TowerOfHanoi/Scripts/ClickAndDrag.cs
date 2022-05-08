@@ -23,9 +23,7 @@ namespace TowerOfHanoi
                     Collider2D[] collidedObjects = Physics2D.OverlapPointAll(_touchPosition);
                     foreach (Collider2D collider in collidedObjects)
                     {
-                        Block block;
-
-                        if (collider.TryGetComponent<Block>(out block))
+                        if (collider.TryGetComponent<Block>(out Block block))
                         {
                             if (block.blockData.isOnAbove)
                             {

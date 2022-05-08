@@ -6,6 +6,7 @@ namespace TowerOfHanoi
 {
     public class Block : MonoBehaviour
     {
+        public static Action OnBlockPlaced;
         public BlockData blockData;
         private Stick currentStick;
 
@@ -37,6 +38,7 @@ namespace TowerOfHanoi
                     if (stick.topBlock == null || stick.topBlock.blockData.size > blockData.size)
                     {
                         PlaceBlock(stick);
+                        OnBlockPlaced?.Invoke();
                         return;
                     }
                     else
