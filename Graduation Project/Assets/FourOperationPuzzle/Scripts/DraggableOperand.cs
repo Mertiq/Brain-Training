@@ -13,6 +13,7 @@ namespace FourOperations {
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
         public Canvas canvas;
+        public AudioManager audioManager;
         private Vector2 startAnchoredPosition;
         public void Awake() {
             this.rectTransform = GetComponent<RectTransform>();
@@ -41,6 +42,7 @@ namespace FourOperations {
                 rectTransform.anchoredPosition+= eventData.delta / canvas.scaleFactor;
         }
         public void OnBeginDrag(PointerEventData eventData) {
+            audioManager.PlaySound("cut-sound");
             if(!isPlaced){
                 startAnchoredPosition = rectTransform.anchoredPosition;
                 canvasGroup.alpha = .6f;
@@ -51,6 +53,11 @@ namespace FourOperations {
         public void OnEndDrag(PointerEventData eventData) {
             if(!isPlaced){
                 ResetPosition();
+                audioManager.PlaySound("cut-sound");
+            }
+            else
+            {
+                audioManager.PlaySound("place-sound");
             }
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;

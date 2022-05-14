@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 namespace FractionalNumbers { 
     public class FractionalNumberManager : MonoBehaviour
@@ -19,11 +22,23 @@ namespace FractionalNumbers {
         private int interest;
         private int denominator;
 
+        public Canvas canvas;
         public Answer[] answers = new Answer[4];
 
-        void Awake()
+        public AudioManager audioManager;
+
+        public GameObject wrongAnswerAnimationPanel;
+
+        public GameObject endGamePanel;
+
+        private void Awake()
         {
             PrepareAnswers();
+            
+        }
+        private void Start()
+        {
+            audioManager.PlaySound("theme");
         }
         public void PrepareAnswers()
         {
@@ -97,10 +112,18 @@ namespace FractionalNumbers {
         {
             if (IsGivenAnswerCorrect())
             {
-                Debug.Log("You're done");
+                audioManager.StopSound("theme");
+                audioManager.PlaySound("submit-true");
+                endGamePanel.SetActive(true);
+                endGamePanel.transform.DOShakeScale(0.5f, 1, 10, 90,true);
+
             }else
             {
-                Debug.Log("You're wrong");
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(1, 0.2f))
+                    .Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(0, 0.2f));
+                audioManager.PlaySound("submit-wrong");
+                
             }
            
         }
@@ -113,6 +136,11 @@ namespace FractionalNumbers {
             int selectedInterest = selectedAnswer.GetInterest();
             int selectedDenominator = selectedAnswer.GetDenominator();
             return (selectedInterest == interest && selectedDenominator == denominator);
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene("Fractional Numbers");
         }
     }
 }
