@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using MainMenu;
+using UnityEngine;
 
 namespace CashierGame
 {
@@ -23,6 +25,7 @@ namespace CashierGame
             {
                 SaveHighScore(newScore);
             }
+            SkillSystemManager.CalculateSkillPoint(Category.MATH,SkillSystemManager.GameName.Cashier,GameManager.score);
             OnScoreSaved?.Invoke();
         }
 

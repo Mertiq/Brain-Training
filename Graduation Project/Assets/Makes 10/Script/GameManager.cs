@@ -20,6 +20,11 @@ namespace Makes_10.Script
 		[SerializeField] public static int score;
 		[SerializeField] private int gameEndTime;
 		
+		public static int Score
+		{
+			get => score;
+			set => score = value <= 0 ? 0 : value;
+		}
 		
 		public delegate void GameEnd ();
 		public static event GameEnd OnGameEnd;  
@@ -84,13 +89,13 @@ namespace Makes_10.Script
 				FindObjectOfType<AudioManager>().PlaySound("correct match");
 				Destroy(firstBallObject);
 				Destroy(secondBallObject);
-				score += 10;
+				Score += 1;
 				OnScoreChanged?.Invoke(score);
 			}
 			else
 			{
 				FindObjectOfType<AudioManager>().PlaySound("wrong match");
-				score -= 10;
+				Score -= 1;
 				OnScoreChanged?.Invoke(score);
 			}
 			canClick = true;

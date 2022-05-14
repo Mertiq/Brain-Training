@@ -17,7 +17,7 @@ public class SkillsUIManager : MonoBehaviour
         {
             var card = Instantiate(skillPrefab, transform);
             var skillPrefabManager = card.GetComponent<SkillPrefabManager>();
-            skillPrefabManager.SkillNameText.text = skill.SkillName;
+            skillPrefabManager.SkillNameText.text = skill.SkillName.ToString();
             skillPrefabManager.Slider.value = (float) skill.CurrentValue / skill.MaxValue;
             skillPrefabManager.SkillValueText.text = $"{skill.CurrentValue}/{skill.MaxValue}";
         }

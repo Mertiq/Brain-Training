@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using MainMenu;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObjects/Skill", order = 1)]
 public class Skill : ScriptableObject
 {
-    [SerializeField] private string skillName;
+    
+    [SerializeField] private Category skillName;
     [SerializeField] private int minValue;
     [SerializeField] private int maxValue;
     [SerializeField] private int currentValue;
 
-    public string SkillName
+    public Category SkillName
     {
         get => skillName;
         set => skillName = value;
