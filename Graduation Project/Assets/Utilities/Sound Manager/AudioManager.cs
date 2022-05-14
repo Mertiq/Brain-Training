@@ -22,6 +22,13 @@ public class AudioManager : MonoBehaviour
             sound.AudioSource.Play();
         }
     }
+    public void StopSound(string soundName)
+    {
+        foreach (var sound in sounds.Where(sound => sound.Name == soundName))
+        {
+            sound.AudioSource.Stop();
+        }
+    }
     
     private static void SetAudioSource(AudioSource audioSource, Sound sound)
     {

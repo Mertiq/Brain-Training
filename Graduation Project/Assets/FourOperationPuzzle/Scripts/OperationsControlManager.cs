@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
+
 namespace FourOperations {
 
    
@@ -15,6 +18,7 @@ namespace FourOperations {
         public OperationMap[] operations = new OperationMap[4];
         public DraggableOperand[] draggableOperands = new DraggableOperand[3];
         public EndGamePanelController endGamePanelController;
+        public AudioManager audioManager;
 
         public void InitalizeOperations() {
             Operation firstOp = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
@@ -35,6 +39,12 @@ namespace FourOperations {
         }
         void Awake() {
             InitalizeOperations();
+            StartBackgroundMusic();
+        }
+
+        public void StartBackgroundMusic()
+        {
+            audioManager.PlaySound("background");
         }
         public Operation GetOperation(OperationIndex opIndex) {
             for(int i = 0; i < operations.Length; i++) {
@@ -68,8 +78,23 @@ namespace FourOperations {
         }
         public void InitializeDraggableOperandValues(){
             List<int> guessableOperands = GuessableOperands();
+            Shuffle(guessableOperands);
              for(int i = 0; i < guessableOperands.Count; i++) {
                 draggableOperands[i].SetValue(guessableOperands[i]);
+            }
+        }
+        private static System.Random rng = new System.Random();
+
+        public static void Shuffle<T>(List<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
             }
         }
         public bool IsGameFinished() {
@@ -86,6 +111,7 @@ namespace FourOperations {
             }
             return false;
         }
+
         public void ControlEndGame() {
             if(IsGameFinished()){
                 Operation firstOperation = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
@@ -98,6 +124,8 @@ namespace FourOperations {
 
                 if(first.GetIsCorrectlyGuessed() && second.GetIsCorrectlyGuessed() && third.GetIsCorrectlyGuessed() && fourth.GetIsCorrectlyGuessed() ){
                     Debug.Log("You win!");
+                    audioManager.StopSound("background");
+                    audioManager.PlaySound("win-music");
                     endGamePanelController.SetEndGameText("You win!");
                     endGamePanelController.gameObject.SetActive(true);
                 }else{
@@ -106,6 +134,33 @@ namespace FourOperations {
                     endGamePanelController.gameObject.SetActive(true);
                 }
             }
+        }
+        public void RestartGame()
+        {
+            SceneManager.LoadScene("Four Operation Puzzle");
+        }
+        public void ClearGameArtifacts()
+        {
+            Operation firstOp = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
+            Operation secondOp = GetOperation(OperationIndex.BOTTOM_TO_RIGHT);
+            Operation thirdOp = GetOperation(OperationIndex.LEFT_TOP_TO_BOTTOM);
+            Operation fourthOp = GetOperation(OperationIndex.RIGHT_TOP_TO_BOTTOM);
+
+            firstOp.LeftOperand.ClearOperandValues();
+            firstOp.RightOperand.ClearOperandValues();
+            firstOp.Operator.SetOperator(Operators.NONE);
+
+            secondOp.LeftOperand.ClearOperandValues();
+            secondOp.RightOperand.ClearOperandValues();
+            secondOp.Operator.SetOperator(Operators.NONE);
+
+            thirdOp.Operator.SetOperator(Operators.NONE);
+            thirdOp.LeftOperand.ClearOperandValues();
+            thirdOp.RightOperand.ClearOperandValues();
+
+            fourthOp.LeftOperand.ClearOperandValues();
+            fourthOp.RightOperand.ClearOperandValues();
+            fourthOp.Operator.SetOperator(Operators.NONE);
         }
         public void RegisterOperandEvents() {
                 Operation firstOperation = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
