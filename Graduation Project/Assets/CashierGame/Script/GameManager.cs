@@ -35,9 +35,12 @@ namespace CashierGame
 
         private void Update()
         {
+            if(isGameEnd) return;
             if (!(Timer.currentTime >= gameEndTime)) return;
+            //SkillSystemManager.IncreaseSkillAndSave("Matematik",50);
             isGameEnd = true;
             OnGameEnd?.Invoke();
+            Time.timeScale = 0;
         }
 
         private void CreateNewLevel()

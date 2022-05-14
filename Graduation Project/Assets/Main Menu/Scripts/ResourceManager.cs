@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-namespace MainMenu
+namespace Main_Menu.Scripts
 {
-    public class ResourceManager : ScriptableSingleton<ResourceManager>
+    public class ResourceManager : MonoBehaviour
     {
-        public int offsetIncreaseValueCardContainer = 1000;
-        public int bottomPaddingForGameCardContainer = 50;
-        public int defaultCardContainerSize = 2000;
+        public static int offsetIncreaseValueCardContainer = 1000;
+        public static int bottomPaddingForGameCardContainer = 50;
+        public static int defaultCardContainerSize = 2000;
     }
 }
+
+
