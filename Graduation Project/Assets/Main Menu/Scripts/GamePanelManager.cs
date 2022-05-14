@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Main_Menu.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,9 +40,9 @@ namespace MainMenu
 
         void SetCardContainerOffset(int gamesCount)
         {
-            int cardHeight = ResourceManager.instance.offsetIncreaseValueCardContainer;
-            int bottomPadding = ResourceManager.instance.bottomPaddingForGameCardContainer;
-            int defaultSize = ResourceManager.instance.defaultCardContainerSize;
+            int cardHeight = ResourceManager.offsetIncreaseValueCardContainer;
+            int bottomPadding = ResourceManager.bottomPaddingForGameCardContainer;
+            int defaultSize = ResourceManager.defaultCardContainerSize;
             RectTransform rectTransform = cardContainer.GetComponent<RectTransform>();
             cardContainer.GetComponent<RectTransform>().offsetMin = new Vector2(rectTransform.offsetMin.x, -1*((Mathf.Ceil((gamesCount / 2f)) * cardHeight) + bottomPadding - defaultSize));
         }

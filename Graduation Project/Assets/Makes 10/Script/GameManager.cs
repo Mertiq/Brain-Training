@@ -74,6 +74,7 @@ namespace Makes_10.Script
 			if (!(Timer.currentTime >= gameEndTime)) return;
 			isGameEnd = true;
 			OnGameEnd?.Invoke();
+			Time.timeScale = 0;
 		}
 
 		private void Control()
