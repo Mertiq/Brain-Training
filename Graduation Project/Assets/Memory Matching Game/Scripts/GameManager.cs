@@ -38,13 +38,6 @@ namespace MemoryMatchingGame
 
 		private void FixedUpdate()
 		{
-			if (isGameEnd)
-			{
-				OnGameEnd?.Invoke();
-				isGameEnd = !isGameEnd;
-				Time.timeScale = 0;
-			}
-
 			if (!canClick) return;
 			if (!Input.GetMouseButtonDown(0)) return;
 			if (Camera.main == null) return;
@@ -104,8 +97,8 @@ namespace MemoryMatchingGame
 
 				if (collectedCardsCount >= 20)
 				{
-					isGameEnd = true;
 					OnGameEnd?.Invoke();
+					Time.timeScale = 0;
 				}
 			}
 			else
