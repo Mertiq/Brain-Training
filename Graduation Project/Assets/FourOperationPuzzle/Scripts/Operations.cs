@@ -20,7 +20,8 @@ namespace FourOperations {
         MUL=0,
         ADD=1,
         SUBS=2,
-        DIV =3
+        DIV =3,
+        NONE=4
     }
     public static class Operations {
         public static string[] Ops = new string[4]{"x","+","-","/"};

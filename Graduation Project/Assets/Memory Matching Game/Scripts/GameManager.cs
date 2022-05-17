@@ -42,6 +42,7 @@ namespace MemoryMatchingGame
 			{
 				OnGameEnd?.Invoke();
 				isGameEnd = !isGameEnd;
+				Time.timeScale = 0;
 			}
 
 			if (!canClick) return;

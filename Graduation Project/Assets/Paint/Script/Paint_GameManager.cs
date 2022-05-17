@@ -86,7 +86,10 @@ public class Paint_GameManager : MonoBehaviour
 		if (hit.collider.CompareTag("Dot"))
 			clickedDot = hit.collider.gameObject;
 		else if (hit.collider.CompareTag("Color"))
+		{
 			selectedColor = hit.collider.gameObject.GetComponent<SpriteRenderer>().color;
+			FindObjectOfType<AudioManager>().PlaySound("change");
+		}
 		else
 			return;
 
@@ -100,6 +103,7 @@ public class Paint_GameManager : MonoBehaviour
 			{
 				paintedDotCount--;
 				clickedDot.GetComponent<Paint_Dot>().painted = true;
+				FindObjectOfType<AudioManager>().PlaySound("paint");
 			}
 		}
 		else
@@ -108,6 +112,7 @@ public class Paint_GameManager : MonoBehaviour
 			{
 				paintedDotCount++;
 				clickedDot.GetComponent<Paint_Dot>().painted = false;
+				FindObjectOfType<AudioManager>().PlaySound("white");
 			}
 		}
 
@@ -133,6 +138,7 @@ public class Paint_GameManager : MonoBehaviour
 		}
 		levelCount++;
 		NewLevel();
+		FindObjectOfType<AudioManager>().PlaySound("end");
 	}
 
 	private void NewLevel()

@@ -18,9 +18,13 @@ namespace CashierGame
         [SerializeField] private Product[] resourcesProducts;
         [SerializeField] private CanvasManager canvasManager;
         [SerializeField] private List<Sprite> customerPhotos;
-        
-        
-        
+
+        public static int Score
+        {
+            get => score;
+            set => score = value <= 0 ? 0 : value;
+        }
+
         public delegate void GameEnd ();
         public static event GameEnd OnGameEnd;    
         public delegate void ScoreChanged (int score);
@@ -35,9 +39,12 @@ namespace CashierGame
 
         private void Update()
         {
+            if(isGameEnd) return;
             if (!(Timer.currentTime >= gameEndTime)) return;
+            //SkillSystemManager.IncreaseSkillAndSave("Matematik",50);
             isGameEnd = true;
             OnGameEnd?.Invoke();
+            Time.timeScale = 0;
         }
 
         private void CreateNewLevel()
@@ -84,12 +91,12 @@ namespace CashierGame
             {
                 FindObjectOfType<AudioManager>().PlaySound("pay fail");
                 DeleteChange();
-                score -= 10;
+                Score -= 1;
                 OnScoreChanged?.Invoke(score);
                 return;
             }
             FindObjectOfType<AudioManager>().PlaySound("pay success");
-            score += 10;
+            Score += 1;
             OnScoreChanged?.Invoke(score);
             Invoke(nameof(CreateNewLevel), .75f);
         }

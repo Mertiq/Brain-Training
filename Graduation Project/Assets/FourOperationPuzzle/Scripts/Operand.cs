@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 namespace FourOperations{
-    public class Operand : MonoBehaviour,IDropHandler {
+    public class Operand : MonoBehaviour, IDropHandler {
         public Text operandText;
         private int operand;
         private int guessedOperand;
@@ -33,6 +33,16 @@ namespace FourOperations{
             this.isGuessed = true;
             this.operandText.text = this.guessedOperand + "";
             this.isCorrectlyGuessed = this.operand == this.guessedOperand; 
+        }
+        public void ClearOperandValues()
+        {
+            this.operandText.text = "";
+            this.guessedOperand = -1;
+            this.isCorrectlyGuessed = false;
+            this.placedGuessOperand = null;
+            this.isHint = false;
+            this.isGuessed = false;
+
         }
         public void SetIsHint(bool isHint) {
             this.isHint = true;
