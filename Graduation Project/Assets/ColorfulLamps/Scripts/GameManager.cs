@@ -19,17 +19,16 @@ namespace ColorfulLambs
 
         [SerializeField] private Light[] lights;
 
-        [SerializeField] private RectTransform failScreen;
-        [SerializeField] private RectTransform congScreen;
+        [SerializeField] private RectTransform endScreen;
         [SerializeField] private RectTransform startScreen;
         [SerializeField] private RectTransform gameScreen;
-        [SerializeField] private GameObject restartBtn;
+        [SerializeField] private TextMeshProUGUI endGameText;
+        [SerializeField] private TextMeshProUGUI newBestScoreText;
 
         private AudioManager audioManager;
 
         private TextMeshProUGUI levelText;
         private TextMeshProUGUI bestScoreText;
-        private TextMeshProUGUI newBestScoreText;
         private Button nextButton;
 
         private float timeIntervalBetweenLights = 1f;
@@ -42,7 +41,6 @@ namespace ColorfulLambs
         void Start()
         {
             audioManager = GetComponent<AudioManager>();
-            newBestScoreText = failScreen.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
             levelText = gameScreen.GetChild(0).GetComponent<TextMeshProUGUI>();
             bestScoreText = gameScreen.GetChild(1).GetComponent<TextMeshProUGUI>();
             nextButton = gameScreen.GetChild(2).GetComponent<Button>();
@@ -58,7 +56,7 @@ namespace ColorfulLambs
         private IEnumerator TurnOnLightsRoutine()
         {
             int index = 0;
-            audioManager.PlaySound("colorfulLambs_startSound");
+            audioManager.PlaySound("colorfulLamps_startSound");
             yield return new WaitForSeconds(2f);
 
             while (index < turnOnLightCount)
@@ -84,7 +82,7 @@ namespace ColorfulLambs
 
         private void TurnOnRndLight(int index)
         {
-            audioManager.PlaySound("colorfulLambs_turnOnSound");
+            audioManager.PlaySound("colorfulLamps_turnOnSound");
             turnOnOrder[index].TurnOnLight();
         }
 
@@ -108,7 +106,7 @@ namespace ColorfulLambs
         {
             if (turnOnOrder[pressedCount].index == index)
             {
-                audioManager.PlaySound("colorfulLambs_rightClickSound");
+                audioManager.PlaySound("colorfulLamps_rightClickSound");
 
                 if (pressedCount == turnOnOrder.Count - 1)
                 {
@@ -117,7 +115,7 @@ namespace ColorfulLambs
             }
             else
             {
-                audioManager.PlaySound("colorfulLambs_failSound");
+                audioManager.PlaySound("colorfulLamps_failSound");
                 StartCoroutine(OpenFailScreen());
             }
 
@@ -127,7 +125,7 @@ namespace ColorfulLambs
         private void OnPlayerSucceed()
         {
             nextButton.gameObject.SetActive(true);
-            audioManager.PlaySound("colorfulLambs_correctSound");
+            audioManager.PlaySound("colorfulLamps_correctSound");
             DisableLightButtons();
         }
 
@@ -146,26 +144,26 @@ namespace ColorfulLambs
 
         private void SetNewBestScore()
         {
-            int bestScore = PlayerPrefs.GetInt("ColorfulLambsBestScore");
+            int bestScore = PlayerPrefs.GetInt("ColorfulLampsBestScore");
 
             if (bestScore != 0)
             {
                 if (bestScore < level)
                 {
-                    PlayerPrefs.SetInt("ColorfulLambsBestScore", level);
+                    PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
                     newBestScoreText.gameObject.SetActive(true);
                 }
             }
             else
             {
-                PlayerPrefs.SetInt("ColorfulLambsBestScore", level);
+                PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
                 newBestScoreText.gameObject.SetActive(true);
             }
         }
 
         private int GetBestScore()
         {
-            int bestScore = PlayerPrefs.GetInt("ColorfulLambsBestScore");
+            int bestScore = PlayerPrefs.GetInt("ColorfulLampsBestScore");
 
             if (bestScore == 0)
             {
@@ -179,12 +177,10 @@ namespace ColorfulLambs
 
         private IEnumerator OpenFailScreen()
         {
-            failScreen.gameObject.SetActive(true);
+            endScreen.gameObject.SetActive(true);
             DisableLightButtons();
-            SetNewBestScore(); 
-            yield return failScreen.DOScale(1.3f, 1f).WaitForCompletion();
-            yield return failScreen.DOScale(1f, 0.5f).WaitForCompletion();
-            restartBtn.SetActive(true);
+            SetNewBestScore();
+            yield break;
         }
 
         #region Button Methods
