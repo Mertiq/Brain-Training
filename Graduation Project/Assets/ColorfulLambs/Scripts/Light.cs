@@ -22,6 +22,13 @@ namespace ColorfulLambs
         public void TurnOnLight()
         {
             turnOnSprite.enabled = true;
+            StartCoroutine(TurnOfLight());
+        }
+
+        private IEnumerator TurnOfLight()
+        {
+            yield return new WaitForSeconds(0.5f);
+            turnOnSprite.enabled = false;
         }
 
         public void EnableInteraction()
@@ -36,6 +43,7 @@ namespace ColorfulLambs
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            TurnOnLight();
             GameManager.onClickLight?.Invoke(this.index);
         }
     }
