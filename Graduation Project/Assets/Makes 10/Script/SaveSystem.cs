@@ -24,7 +24,7 @@ namespace Makes_10.Script
             {
                 SaveHighScore(newScore);
             }
-            SkillSystemManager.CalculateSkillPoint(Category.MATH,SkillSystemManager.GameName.Ten,GameManager.score);
+            SkillSystemManager.CalculateSkillPoint(Category.Visual,SkillSystemManager.GameName.Ten,GameManager.score);
             OnScoreSaved?.Invoke();
         }
 

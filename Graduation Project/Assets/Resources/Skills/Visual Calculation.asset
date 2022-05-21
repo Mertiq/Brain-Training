@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fe4308e1f065924cabd8eb143cdeade, type: 3}
-  m_Name: Game7
+  m_Script: {fileID: 11500000, guid: 274fb4a3a7bbbfa4ca009708185d725f, type: 3}
+  m_Name: Visual Calculation
   m_EditorClassIdentifier: 
-  _name: Guess Time
-  image: {fileID: 2182406899979887443, guid: 322c10505e4dd9d4c89d708dc0bb68f8, type: 3}
-  description: analitik zaman
-  category: 2
+  skillName: 1
+  minValue: 0
+  maxValue: 500
+  currentValue: 0

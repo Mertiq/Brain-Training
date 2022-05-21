@@ -15,4 +15,4 @@ MonoBehaviour:
   _name: Paint
   image: {fileID: 21300000, guid: 87cab02498d1d5242bb9455211bb629e, type: 3}
   description: 10 yapar
-  category: 3
+  category: 1
