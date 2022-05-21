@@ -24,6 +24,12 @@ public class ClockManagement : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GameTimer());
+        Invoke(nameof(LostTime), 2.0f);
+    }
+
+    private void LostTime()
+    {
+        guessText.gameObject.SetActive(false);
     }
     IEnumerator GameTimer()
     {

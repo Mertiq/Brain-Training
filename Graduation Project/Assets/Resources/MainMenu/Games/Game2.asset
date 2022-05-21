@@ -15,4 +15,4 @@ MonoBehaviour:
   _name: Cashier Game
   image: {fileID: 21300000, guid: 1833689e57cef5944a951c342b3b7ff1, type: 3}
   description: Give the customer full change
-  category: 0
+  category: 3
