@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 1
   minValue: 0
-  maxValue: 500
-  currentValue: 0
+  maxValue: 22500
+  currentValue: 1000

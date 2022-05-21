@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274fb4a3a7bbbfa4ca009708185d725f, type: 3}
   m_Name: Visual Calculation
   m_EditorClassIdentifier: 
-  skillName: 1
+  skillName: 3
   minValue: 0
-  maxValue: 500
-  currentValue: 0
+  maxValue: 22500
+  currentValue: 22500
