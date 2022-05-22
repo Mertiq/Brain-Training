@@ -18,6 +18,8 @@ namespace CashierGame
         [SerializeField] private Product[] resourcesProducts;
         [SerializeField] private CanvasManager canvasManager;
         [SerializeField] private List<Sprite> customerPhotos;
+        [SerializeField] private Utilities.Timer timer;
+        
 
         public static int Score
         {
@@ -40,7 +42,7 @@ namespace CashierGame
         private void Update()
         {
             if(isGameEnd) return;
-            if (!(Timer.currentTime >= gameEndTime)) return;
+            if (!(timer.currentTime >= gameEndTime)) return;
             //SkillSystemManager.IncreaseSkillAndSave("Matematik",50);
             isGameEnd = true;
             OnGameEnd?.Invoke();

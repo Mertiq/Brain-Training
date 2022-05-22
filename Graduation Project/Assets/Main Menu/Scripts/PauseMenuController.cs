@@ -25,6 +25,12 @@ namespace MainMenu
             Screen.orientation = ScreenOrientation.Portrait;
             SceneManager.LoadScene("Main Menu");
         }
+
+        public void PlayAgain()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1;
+        }
     }
 }
 

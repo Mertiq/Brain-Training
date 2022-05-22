@@ -77,6 +77,7 @@ namespace CashierGame
             GameManager.OnScoreChanged -= SetScoreText;
             SaveSystem.OnScoreSaved -= ShowEndGamePanel;
         }
+        
     }
 } 
 

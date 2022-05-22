@@ -26,8 +26,8 @@ public class SkillSystemManager
         {GameName.Fract, 16.67f},
         {GameName.Percent, 16.67f},
         {GameName.Time, 16.67f},
-        {GameName.Paint, 20000},
-        {GameName.Card, 50000}
+        {GameName.Paint, 1/20000f},
+        {GameName.Card, 1/50000f},
     };
     
     public static void CalculateSkillPoint(Category skillName, GameName gameName, float point)
