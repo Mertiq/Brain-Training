@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4754691916667910486}
   - component: {fileID: 5220887797788479949}
   - component: {fileID: 5080006412751518906}
-  - component: {fileID: 6003803869044214913}
   m_Layer: 5
   m_Name: desc text
   m_TagString: Untagged
@@ -78,19 +77,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: bu bir oyundur aksini iaadsaklsdjalskdjlasdlaksd
---- !u!114 &6003803869044214913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788133643118952641}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc97eea0ed364114d959cf5627afc32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Text: "kesirli say\u0131lar"
 --- !u!1 &1850146104140092116
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6757f831fcff56b4a88e15f7f623ded2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9283b8a858e29834cb81c1080617b41a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -261,7 +248,7 @@ MonoBehaviour:
   nameText: {fileID: 1850146104530573149}
   descriptionText: {fileID: 1788133643118952641}
   imageObject: {fileID: 3929377205416285437}
-  sceneName: 
+  sceneName: Fractional Numbers
 --- !u!114 &5623824308384297274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +272,6 @@ GameObject:
   - component: {fileID: 1850146104530573146}
   - component: {fileID: 1850146104530573144}
   - component: {fileID: 1850146104530573147}
-  - component: {fileID: 5784545054254988727}
   m_Layer: 5
   m_Name: name text
   m_TagString: Untagged
@@ -352,19 +338,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: game9
---- !u!114 &5784545054254988727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850146104530573149}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc97eea0ed364114d959cf5627afc32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Text: Fractional Numbers
 --- !u!1 &3929377205416285437
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1a65aae41cbb0ba488806b084edfb92b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

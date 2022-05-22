@@ -9,7 +9,7 @@ namespace Utilities
     public class TimeUIManager : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI timeText;
-        private Timer timer;
+        private Timer _timer;
         private System.Action<GameObject> onTimeSet;
 
         public void AddOnTimeSetListener(System.Action<GameObject> action)
@@ -18,11 +18,11 @@ namespace Utilities
         }
         private void Awake()
         {
-            timer = gameObject.GetComponent<Timer>();
+            _timer = gameObject.GetComponent<Timer>();
         }
         private void Update()
         {
-            SetTimeText(Timer.GetCurrentTime());
+            SetTimeText(_timer.GetCurrentTime());
         }
         private void SetTimeText(float currentTime)
         {

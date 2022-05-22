@@ -167,7 +167,6 @@ GameObject:
   - component: {fileID: 1850146104530573146}
   - component: {fileID: 1850146104530573144}
   - component: {fileID: 1850146104530573147}
-  - component: {fileID: 2535921151974274325}
   m_Layer: 5
   m_Name: category name
   m_TagString: Untagged
@@ -235,18 +234,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: MATHEMATK
---- !u!114 &2535921151974274325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850146104530573149}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc97eea0ed364114d959cf5627afc32b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3839765196647152734
 GameObject:
   m_ObjectHideFlags: 0

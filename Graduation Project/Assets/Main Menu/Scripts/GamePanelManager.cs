@@ -10,6 +10,9 @@ namespace MainMenu
     {
         public GameObject gameCard;
         public GameObject cardContainer;
+        [SerializeField] private GameObject fadePanel;
+
+        
         
         Game[] games;
 
@@ -32,7 +35,8 @@ namespace MainMenu
             {
                 if (game.category != category) continue;
                 gameCard.GetComponent<GameCard>().SetGameCard(game._name, game.description, game.image);
-                Instantiate(gameCard, cardContainer.transform);
+                GameObject card = Instantiate(gameCard, cardContainer.transform);
+                card.GetComponent<Button>().onClick.AddListener(() => MainMenuAnimationController.FadeInAnim(fadePanel));
                 counter++;
             }
             SetCardContainerOffset(counter);

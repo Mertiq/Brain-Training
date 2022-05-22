@@ -36,5 +36,10 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = sound.Volume;
         audioSource.loop = sound.Loop;
     }
+    
+    public void PlayRandom()
+    {
+        sounds[Random.Range(0, sounds.Count)].AudioSource.Play();
+    }
 }
 

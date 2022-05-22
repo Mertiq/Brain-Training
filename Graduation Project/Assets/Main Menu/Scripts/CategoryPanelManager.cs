@@ -21,6 +21,7 @@ namespace MainMenu
                 card.GetComponent<CategoryCard>().SetCard(category, images[count++]);
                 card.GetComponent<Button>().onClick.AddListener(() => gmp.InitializeGameCards(category));
                 card.GetComponent<Button>().onClick.AddListener(() => gameObject.SetActive(false));
+                card.GetComponent<Button>().onClick.AddListener(() => MainMenuAnimationController.LittleLittleShake(gmp.cardContainer));
             }
         }
     }
