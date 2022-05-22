@@ -15,4 +15,4 @@ MonoBehaviour:
   _name: Makes 10
   image: {fileID: 21300000, guid: 4f0a098cece57644da4ad8f21797be24, type: 3}
   description: 10 yapar
-  category: 0
+  category: 3

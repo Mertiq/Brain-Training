@@ -7,15 +7,15 @@ namespace Utilities
 {
     public class Timer : MonoBehaviour
     {
-        private float currentTime = 0.0f;
+        public static float currentTime = 0.0f;
 
         private void Update()
         {
             currentTime += Time.deltaTime;
         }
-        public float GetCurrentTime()
+        public static float GetCurrentTime()
         {
-            return this.currentTime;
+            return currentTime;
         }
     }
 }

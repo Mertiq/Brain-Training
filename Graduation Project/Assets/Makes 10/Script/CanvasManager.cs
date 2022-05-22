@@ -9,7 +9,7 @@ namespace Makes_10.Script
     public class CanvasManager : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI timeText;
-        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI scoreText; 
         [SerializeField] private GameObject endGamePanel;
         [SerializeField] private Text newScoreText;
         [SerializeField] private Text highScoreText;

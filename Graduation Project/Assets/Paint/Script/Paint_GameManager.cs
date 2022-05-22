@@ -17,6 +17,9 @@ public class Paint_GameManager : MonoBehaviour
 
 	int levelCount = 0;
 
+	[SerializeField] private bool isGameEnd;
+	public delegate void GameEnd ();
+	public static event GameEnd OnGameEnd;   
 	private void Start()
 	{
 		levelGenerator = GetComponent<Paint_LevelGenerator>();
@@ -76,6 +79,12 @@ public class Paint_GameManager : MonoBehaviour
 
 	private void Update()
 	{
+		if (isGameEnd)
+		{
+			OnGameEnd?.Invoke();
+			Time.timeScale = 0;
+			isGameEnd = !isGameEnd;
+		}
 		SetSelectedColor();
 		if (!Input.GetMouseButtonDown(0)) return;
 		var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -136,8 +145,10 @@ public class Paint_GameManager : MonoBehaviour
 				}
 			}
 		}
+		OnGameEnd?.Invoke();
+		Time.timeScale = 0;
 		levelCount++;
-		NewLevel();
+		//NewLevel();
 		FindObjectOfType<AudioManager>().PlaySound("end");
 	}
 

@@ -22,7 +22,7 @@ namespace Utilities
         }
         private void Update()
         {
-            SetTimeText(timer.GetCurrentTime());
+            SetTimeText(Timer.GetCurrentTime());
         }
         private void SetTimeText(float currentTime)
         {

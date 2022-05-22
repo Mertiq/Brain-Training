@@ -25,7 +25,7 @@ namespace CashierGame
             {
                 SaveHighScore(newScore);
             }
-            SkillSystemManager.CalculateSkillPoint(Category.MATH,SkillSystemManager.GameName.Cashier,GameManager.score);
+            SkillSystemManager.CalculateSkillPoint(Category.Visual,SkillSystemManager.GameName.Cashier,GameManager.score);
             OnScoreSaved?.Invoke();
         }
 

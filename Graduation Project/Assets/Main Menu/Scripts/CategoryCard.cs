@@ -7,13 +7,11 @@ namespace MainMenu
 {
     public enum Category
     {
-        MATH,
-        MEMORY,
-        PHYSICS,
-        ART,
-        LANGUAGE
+        Arithmetic,
+        Matching,
+        Memory,
+        Visual
     }
-
 
     public class CategoryCard : MonoBehaviour
     {

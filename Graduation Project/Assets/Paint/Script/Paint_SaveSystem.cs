@@ -1,9 +1,10 @@
-﻿using MainMenu;
+﻿using System;
 using UnityEngine;
+using Utilities;
 
-namespace Makes_10.Script
+namespace Paint.Script
 {
-    public class SaveSystem : MonoBehaviour
+    public class Paint_SaveSystem : MonoBehaviour
     {
         [SerializeField] private string gameName;
         [SerializeField] private float newScore;
@@ -19,12 +20,11 @@ namespace Makes_10.Script
         
         private void SaveNewScore()
         {
-            newScore = GameManager.score;
-            if (newScore > LoadHighScore())
+            newScore = (float) Math.Round(Timer.currentTime, 2);
+            if (newScore < LoadHighScore())
             {
                 SaveHighScore(newScore);
             }
-            SkillSystemManager.CalculateSkillPoint(Category.Visual,SkillSystemManager.GameName.Ten,GameManager.score);
             OnScoreSaved?.Invoke();
         }
 
@@ -40,12 +40,12 @@ namespace Makes_10.Script
 
         private void OnEnable()
         {
-            GameManager.OnGameEnd += SaveNewScore;
+            Paint_GameManager.OnGameEnd += SaveNewScore;
         }
 
         private void OnDisable()
         {
-            GameManager.OnGameEnd -= SaveNewScore;
+            Paint_GameManager.OnGameEnd -= SaveNewScore;
         }
     }
 }

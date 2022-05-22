@@ -15,4 +15,4 @@ MonoBehaviour:
   _name: Memory Matching Game
   image: {fileID: 21300000, guid: f4eac90237abf5b489696d91060b92a3, type: 3}
   description: Match the planets on the cards
-  category: 1
+  category: 2
