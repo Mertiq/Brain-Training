@@ -48,6 +48,6 @@ public class MainMenuAnimationController : MonoBehaviour
     public static void FadeOutAnim(GameObject go)
     {
         var sequence = DOTween.Sequence();
-        sequence.Append(go.GetComponent<Image>().DOFade(0f,0.5f));
+        sequence.Append(go.GetComponent<Image>().DOFade(0f,0.7f));
     }
 }

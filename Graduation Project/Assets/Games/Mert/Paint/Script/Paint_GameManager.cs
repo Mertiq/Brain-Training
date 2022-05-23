@@ -11,8 +11,6 @@ public class Paint_GameManager : MonoBehaviour
 	List<Color> colors = new List<Color>();
 
 	public List<GameObject> colorPalettes = new List<GameObject>();
-
-	[SerializeField] private GameObject fadePanel;
 	
 
 	int paintedDotCount;
@@ -25,7 +23,6 @@ public class Paint_GameManager : MonoBehaviour
 	public static event GameEnd OnGameEnd;   
 	private void Start()
 	{
-		MainMenuAnimationController.FadeOutAnim(fadePanel);
 		levelGenerator = GetComponent<Paint_LevelGenerator>();
 		colors.Add(Color.blue);
 		colors.Add(Color.red);
