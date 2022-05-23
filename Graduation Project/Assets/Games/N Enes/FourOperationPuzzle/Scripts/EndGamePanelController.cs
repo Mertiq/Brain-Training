@@ -3,11 +3,10 @@ using UnityEngine.UI;
 namespace FourOperations {
     public class EndGamePanelController : MonoBehaviour {
         
-        public Text endGameText;
+        //play again
+        // menu
 
-        public void SetEndGameText(string text) {
-            this.endGameText.text = text;
-        }
+       
     }
 }
 

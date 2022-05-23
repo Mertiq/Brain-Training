@@ -104,7 +104,7 @@ namespace MemoryMatchingGame
 			else
 			{
 				FindObjectOfType<AudioManager>().PlaySound("wrong match");
-				firstCard.clickable = true;
+				firstCard.clickable = true;	
 				secondCard.clickable = true;
 			}
 			canClick = true;

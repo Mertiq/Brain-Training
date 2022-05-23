@@ -38,7 +38,10 @@ public class MainMenuAnimationController : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(go.transform.DOShakeScale(1f,0.1f));
     }
-
+    public static void VeryVeryShake(GameObject go)
+    {
+        go.transform.DOShakeScale(0.5f, 1, 10, 90, true);
+    }
     public static void FadeInAnim(GameObject go)
     {
         var sequence = DOTween.Sequence();

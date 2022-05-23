@@ -14,40 +14,17 @@ namespace MemoryMatchingGame
         [SerializeField] private TextMeshProUGUI timeText;
         [SerializeField] private GameObject endGamePanel;
         [SerializeField] private SaveSystem saveSystem;
+
         
         private void Update()
         {
             collectedCardsText.text = GameManager.collectedCardsCount + "/20";
-            SetTimeText(Timer.currentTime);
         }
-        
-        private void SetTimeText(float currentTime)
-        {
-            var seconds = (int) currentTime % 60;
-            var minute = (int) currentTime / 60;
-
-            switch (seconds < 10)
-            {
-                case true when minute < 10:
-                    timeText.text = "0" + minute + ":0" + seconds;
-                    break;
-                case true:
-                    timeText.text = minute + ":0" + seconds;
-                    break;
-                default:
-                {
-                    if (minute < 10)
-                    {
-                        timeText.text = "0" + minute + ":" + seconds;
-                    }
-                    break;
-                }
-            }
-        }
-
         private void ShowEndGamePanel()
         {
             endGamePanel.SetActive(true);
+            MainMenuAnimationController.VeryVeryShake(endGamePanel);
+            Time.timeScale = 0;
             highScoreText.text = saveSystem.LoadHighScore().ToString(CultureInfo.CurrentCulture);
             newScoreText.text = saveSystem.NewScore.ToString(CultureInfo.CurrentCulture);
         }
@@ -56,7 +33,7 @@ namespace MemoryMatchingGame
         {
             SaveSystem.OnScoreSaved += ShowEndGamePanel;
         }
-
+        
         private void OnDisable()
         {
             SaveSystem.OnScoreSaved -= ShowEndGamePanel;

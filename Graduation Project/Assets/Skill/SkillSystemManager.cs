@@ -26,13 +26,14 @@ public class SkillSystemManager
         {GameName.Fract, 16.67f},
         {GameName.Percent, 16.67f},
         {GameName.Time, 16.67f},
-        {GameName.Paint, 1/20000f},
-        {GameName.Card, 1/50000f},
+        {GameName.Paint, 20000f},
+        {GameName.Card, 50000f},
     };
     
     public static void CalculateSkillPoint(Category skillName, GameName gameName, float point)
     {
         IncreaseSkillAndSave(skillName, (int) (Multiplier[gameName] * point));
+        Debug.Log((int)(Multiplier[gameName] * point));
     }
 
     public static void IncreaseSkillAndSave(Category skillName, int plusValue)

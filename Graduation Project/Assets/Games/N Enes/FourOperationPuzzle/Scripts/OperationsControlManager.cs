@@ -126,11 +126,11 @@ namespace FourOperations {
                     Debug.Log("You win!");
                     audioManager.StopSound("background");
                     audioManager.PlaySound("win-music");
-                    endGamePanelController.SetEndGameText("You win!");
+                   // endGamePanelController.SetEndGameText("You win!");
                     endGamePanelController.gameObject.SetActive(true);
                 }else{
                     Debug.Log("You lost!");
-                    endGamePanelController.SetEndGameText("You lost!");
+                    //endGamePanelController.SetEndGameText("You lost!");
                     endGamePanelController.gameObject.SetActive(true);
                 }
             }
