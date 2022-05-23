@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Makes 10
   image: {fileID: 21300000, guid: 4f0a098cece57644da4ad8f21797be24, type: 3}
-  description: 10 yapar
+  description: Try to match the numbers which makes 10.
   category: 3
