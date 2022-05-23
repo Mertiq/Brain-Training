@@ -22,8 +22,6 @@ namespace GuessPercentage
             public void UpdateGUI()
             {
                 this.percentageText.text = ((float)((float)this.interest / (float)this.denominator) * 100 ).ToString("0.0");
-
-
             }
             public void SetInterest(int interest)
             {
