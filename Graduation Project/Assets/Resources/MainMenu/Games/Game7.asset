@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Game7
   m_EditorClassIdentifier: 
   _name: Guess Time
-  image: {fileID: 2182406899979887443, guid: 322c10505e4dd9d4c89d708dc0bb68f8, type: 3}
-  description: analitik zaman
+  image: {fileID: 21300000, guid: 3fdbd2ccafa396d4795d166cd6ddcf8e, type: 3}
+  description: Try to guess the correct clock position by given clock value
   category: 2

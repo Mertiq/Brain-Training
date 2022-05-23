@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Game5
   m_EditorClassIdentifier: 
   _name: Four Operation Puzzle
-  image: {fileID: 3051382885313656451, guid: 322c10505e4dd9d4c89d708dc0bb68f8, type: 3}
-  description: "4 i\u015Flem"
+  image: {fileID: 21300000, guid: be59120a14c44f94fab323e77664342b, type: 3}
+  description: Try to solve the math puzzle with 4 random operations.
   category: 0

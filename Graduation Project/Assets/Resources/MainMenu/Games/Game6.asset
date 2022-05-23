@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Game6
   m_EditorClassIdentifier: 
   _name: Fractional Numbers
-  image: {fileID: 21300000, guid: 1a65aae41cbb0ba488806b084edfb92b, type: 3}
-  description: "kesirli say\u0131lar"
+  image: {fileID: 21300000, guid: 8443df270ea05384c9a03fec37385dc2, type: 3}
+  description: Try to find the correct fractional number.
   category: 0

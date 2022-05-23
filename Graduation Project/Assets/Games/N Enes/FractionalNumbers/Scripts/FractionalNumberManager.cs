@@ -21,19 +21,21 @@ namespace FractionalNumbers {
 
         private int interest;
         private int denominator;
-
+        private int wrongGuessCount = 0;
         public Canvas canvas;
         public Answer[] answers = new Answer[4];
 
         public AudioManager audioManager;
 
         public GameObject wrongAnswerAnimationPanel;
-
+        public Text endGameCurrentScoreText;
+        public Text endGameHighScoreText;
         public GameObject endGamePanel;
 
         private void Awake()
         {
             PrepareAnswers();
+
             
         }
         private void Start()
@@ -114,15 +116,32 @@ namespace FractionalNumbers {
             {
                 audioManager.StopSound("theme");
                 audioManager.PlaySound("submit-true");
-                endGamePanel.SetActive(true);
-                endGamePanel.transform.DOShakeScale(0.5f, 1, 10, 90,true);
+                float initialScore = SkillSystemManager.Multiplier[SkillSystemManager.GameName.Fract];
+                float score = (wrongGuessCount >= 3) ? 0 : initialScore - (wrongGuessCount * 10);
+                if (score < 0) score = 0;
+                SkillSystemManager.CalculateSkillPoint(MainMenu.Category.Arithmetic, SkillSystemManager.GameName.Fract, score);
+                audioManager.PlaySound("win");
+                endGameCurrentScoreText.text = score.ToString("00.00"); ;
 
-            }else
+                float highScore = PlayerPrefs.GetFloat("fractional-high-score");
+                if(score >= highScore)
+                {
+                    highScore = score;
+                    PlayerPrefs.SetFloat("fractional-high-score",highScore);
+                }
+                endGameHighScoreText.text = highScore.ToString("00.00");
+                endGamePanel.SetActive(true);
+                MainMenuAnimationController.VeryVeryShake(endGamePanel);
+                Time.timeScale = 0f;
+
+            }
+            else
             {
                 Sequence sequence = DOTween.Sequence();
                 sequence.Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(1, 0.2f))
                     .Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(0, 0.2f));
                 audioManager.PlaySound("submit-wrong");
+                wrongGuessCount++;
                 
             }
            

@@ -43,7 +43,7 @@ namespace CashierGame
         {
             if(isGameEnd) return;
             if (!(timer.currentTime >= gameEndTime)) return;
-            //SkillSystemManager.IncreaseSkillAndSave("Matematik",50);
+         
             isGameEnd = true;
             OnGameEnd?.Invoke();
             

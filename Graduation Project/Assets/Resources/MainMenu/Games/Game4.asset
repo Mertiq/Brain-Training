@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Game4
   m_EditorClassIdentifier: 
   _name: Guess Percentage
-  image: {fileID: 21300000, guid: c8ac6e8dcbcea8747a59d257b9360995, type: 3}
-  description: guess
+  image: {fileID: 21300000, guid: 981d452ebca637f4a9c6760b4bb37158, type: 3}
+  description: Try to find the correct percentage answer.
   category: 0

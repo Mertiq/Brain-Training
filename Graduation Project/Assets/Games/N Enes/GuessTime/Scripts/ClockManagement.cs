@@ -10,6 +10,9 @@ public class ClockManagement : MonoBehaviour
     public GameObject minuteHand;
     public GameObject hourHand;
     public Text guessText;
+    public GameObject endGamePanel;
+    public AudioManager audioManager;
+    public Text endGameCurrentScoreText;
     int exactHour;
     int exactMinute;
     int retryCount;
@@ -25,8 +28,12 @@ public class ClockManagement : MonoBehaviour
     {
         StartCoroutine(GameTimer());
         Invoke(nameof(LostTime), 2.0f);
+        Invoke(nameof(ClockSound), 1.0f);
     }
-
+    private void ClockSound()
+    {
+        audioManager.PlaySound("clock");
+    }
     private void LostTime()
     {
         guessText.gameObject.SetActive(false);
@@ -50,7 +57,6 @@ public class ClockManagement : MonoBehaviour
             {
                 minute += 15;
             }
-            Debug.Log("Hour : " + hour + " Minute: " + minute);
             iTween.RotateTo(minuteHand, iTween.Hash("z", minute * 6 * -1, "time", 1, "easetype", "linear"));
             float hourDistance = (float)(minute) / 60f;
             iTween.RotateTo(hourHand, iTween.Hash("z", (hour + hourDistance) * 360 / 12 * -1, "time",1, "easetype", "linear"));
@@ -91,10 +97,16 @@ public class ClockManagement : MonoBehaviour
     {
         if (IsClockGuessed())
         {
-            float point = CalculatePoint();
-            Debug.Log("Yess is guessed!");
-            Debug.Log(point);
-        }else
+            float score = SkillSystemManager.Multiplier[SkillSystemManager.GameName.Time] - (10 * retryCount);
+            if (score < 0) score = 0;
+            SkillSystemManager.CalculateSkillPoint(MainMenu.Category.Memory, SkillSystemManager.GameName.Time, score);
+            audioManager.PlaySound("win");
+            endGameCurrentScoreText.text = score + "";
+            endGamePanel.SetActive(true);
+            MainMenuAnimationController.VeryVeryShake(endGamePanel);
+            Time.timeScale = 0f;
+        }
+        else
         {
             retryCount++;
         }

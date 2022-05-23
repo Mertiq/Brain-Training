@@ -135,7 +135,6 @@ namespace FourOperations {
                     endGamePanel.SetActive(true);
                     MainMenuAnimationController.VeryVeryShake(endGamePanel);
                     Time.timeScale = 0f;
-                  
                    
                 }
             }

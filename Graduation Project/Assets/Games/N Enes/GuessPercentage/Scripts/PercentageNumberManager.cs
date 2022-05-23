@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
+
 namespace GuessPercentage
 {
 
@@ -10,13 +13,15 @@ namespace GuessPercentage
         public GameObject filledItem;
         public GameObject emptyItem;
         public GameObject content;
-
+        public Text endGameCurrentScoreText;
+        public Text endGameHighScoreText;
+        public GameObject endGamePanel;
         public EventSystem eventSystem;
         private PercentageAnswer selectedPercentageAnswer;
-
+        public GameObject wrongAnswerAnimationPanel;
         public int minDenominator;
         public int maxDenominator;
-
+        private int wrongGuessCount = 0;
         private int interest;
         private int denominator;
 
@@ -25,6 +30,10 @@ namespace GuessPercentage
         void Awake()
         {
             PreparePercentageAnswers();
+        }
+        private void Start()
+        {
+            GetComponent<AudioManager>().PlaySound("background");
         }
         public void PreparePercentageAnswers()
         {
@@ -99,13 +108,40 @@ namespace GuessPercentage
         {
             if (IsGivenPercentageAnswerCorrect())
             {
-                Debug.Log("You're done");
+                GetComponent<AudioManager>().StopSound("background");
+                GetComponent<AudioManager>().PlaySound("submit-true");
+                float initialScore = SkillSystemManager.Multiplier[SkillSystemManager.GameName.Percent];
+                float score = (wrongGuessCount >= 3) ? 0 : initialScore - (wrongGuessCount * 10);
+                if (score < 0) score = 0;
+                SkillSystemManager.CalculateSkillPoint(MainMenu.Category.Arithmetic, SkillSystemManager.GameName.Percent, score);
+                GetComponent<AudioManager>().PlaySound("win");
+                endGameCurrentScoreText.text = score.ToString("00.00"); ;
+
+                float highScore = PlayerPrefs.GetFloat("percentage-high-score");
+                if (score >= highScore)
+                {
+                    highScore = score;
+                    PlayerPrefs.SetFloat("percentage-high-score", highScore);
+                }
+                endGameHighScoreText.text = highScore.ToString("00.00");
+                endGamePanel.SetActive(true);
+                MainMenuAnimationController.VeryVeryShake(endGamePanel);
+                Invoke(nameof(StopScale), 0.5f);
             }
             else
             {
-                Debug.Log("You're wrong");
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(1, 0.2f))
+                    .Append(wrongAnswerAnimationPanel.GetComponent<Image>().DOFade(0, 0.2f));
+                GetComponent<AudioManager>().PlaySound("submit-wrong");
+                wrongGuessCount++;
+
             }
 
+        }
+        public void StopScale()
+        {
+            Time.timeScale = 0f;
         }
         public void ChoosePercentageAnswer(PercentageAnswer PercentageAnswer)
         {

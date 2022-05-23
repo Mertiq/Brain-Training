@@ -27,7 +27,7 @@ public class SkillSystemManager
         {GameName.FourOp, 20.1f},
         {GameName.Fract, 16.67f},
         {GameName.Percent, 16.67f},
-        {GameName.Time, 16.67f},
+        {GameName.Time, 20.1f},
         {GameName.Paint, 20000f},
         {GameName.Card, 50000f},
         {GameName.Lamps, 20000f},
