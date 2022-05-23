@@ -13,6 +13,8 @@ namespace WordAdventure
 
         [SerializeField] private TMPro.TextMeshProUGUI targetTextUi;
         [SerializeField] private TMPro.TextMeshProUGUI caughtLettersTextUi;
+        [SerializeField] private GameObject endGamePanel;
+        [SerializeField] private TextMeshProUGUI endGameText;
 
         private string targetText;
 
@@ -22,14 +24,35 @@ namespace WordAdventure
             targetTextUi.text = targetText;
         }
 
+        public void AddCaughtLetter(string letter)
+        {
+                caughtLettersTextUi.text += letter;
+                CheckGameEnd();
+        }
+
         private int GetRandomNum()
         {
             return Random.Range(0, WordsList.Length);
         }
 
-        public void AddCaughtLetter(string letter)
+        private void CheckGameEnd()
         {
-            caughtLettersTextUi.text += letter;
+            for(int i = 0; i < caughtLettersTextUi.text.Length; i++)
+            {
+                if(caughtLettersTextUi.text[i] != targetText[i])
+                {
+                    Time.timeScale = 0;
+                    endGamePanel.SetActive(true);
+                }
+                else
+                {
+                    if(caughtLettersTextUi.text.Length == targetText.Length)
+                    {
+                        Time.timeScale = 0;
+                        endGamePanel.SetActive(true);
+                    }
+                }
+            }
         }
     }
 }

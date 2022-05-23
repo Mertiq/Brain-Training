@@ -7,7 +7,7 @@ namespace WordAdventure
 {
     public class CarController : MonoBehaviour
     {
-        string st = "BCDEOHPRSUV";
+        static readonly string st = "BCDOHPSU";
 
         [SerializeField] private GameManager GameManager;
         [SerializeField] private GameObject RoadObject;
@@ -17,6 +17,7 @@ namespace WordAdventure
 
         private Sequence turnSequence;
         private int currentLane;
+
         void Start()
         {
             turnSequence = DOTween.Sequence();
@@ -36,7 +37,7 @@ namespace WordAdventure
                 takenWay += speed * Time.deltaTime;
                 elapsedTime += Time.deltaTime;
 
-                if (takenWay > 100f)
+                if (takenWay > 180f)
                 {
                     RoadObject.transform.Translate(0f, 0f, takenWay);
                     Letters.transform.Translate(0f, 0f, takenWay);
@@ -134,23 +135,29 @@ namespace WordAdventure
 
         private void OnTriggerEnter(Collider other)
         {
-            Letter l = other.gameObject.GetComponent<Letter>();
+            Letter letter = other.gameObject.GetComponent<Letter>();
 
-            if (l.Lane == currentLane)
+            if (letter.Lane == currentLane)
             {
-                GameManager.AddCaughtLetter(l.letter);
+                GameManager.AddCaughtLetter(letter.letter);
             }
 
-            StartCoroutine(ChangeLetterRoutine(2f, l));
+            StartCoroutine(ChangeLetterRoutine(2f, letter));
         }
 
-        private IEnumerator ChangeLetterRoutine(float time, Letter l)
+        public static string GetRandomLetter()
         {
-            yield return new WaitForSeconds(time);
-            int lane = Random.Range(-1, 2);
-            char c = st[Random.Range(0, st.Length)];
-            l.SetLetter(lane, c.ToString());
+            return st[Random.Range(0, st.Length - 1)].ToString();
         }
 
+        private IEnumerator ChangeLetterRoutine(float time, Letter letter)
+        {
+            letter.gameObject.SetActive(false);
+            yield return new WaitForSeconds(time);
+            letter.gameObject.SetActive(true);
+            int lane = Random.Range(-1, 2);
+            string l = GetRandomLetter();
+            letter.SetLetter(lane, l);
+        }
     }
 }
