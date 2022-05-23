@@ -22,11 +22,6 @@ namespace ReflectionPuzzle
             instantiatedShapes = new List<GameObject>();
         }
 
-        private void Start()
-        {
-            Screen.orientation = ScreenOrientation.Landscape;
-        }
-
         public void CreateTiles(int rows, int cols)
         {
             InitLayout(rows, cols);
@@ -43,10 +38,10 @@ namespace ReflectionPuzzle
             GetComponent<GridLayoutGroup>().constraintCount = rows;
             GetComponent<GridLayoutGroup>().cellSize = new Vector2(cellSize, cellSize);
 
-            if(transform.name == "RealTiles")
-                GetComponent<GridLayoutGroup>().padding = new RectOffset(Mathf.RoundToInt(cellSize + cellSize / 3), 0, 0, 0);
-            else
-                GetComponent<GridLayoutGroup>().padding = new RectOffset(0, Mathf.RoundToInt(cellSize + cellSize / 3), 0, 0);
+            //if(transform.name == "RealTiles")
+              //  GetComponent<GridLayoutGroup>().padding = new RectOffset(Mathf.RoundToInt(cellSize + cellSize / 3), 0, 0, 0);
+         //   else
+             //   GetComponent<GridLayoutGroup>().padding = new RectOffset(0, Mathf.RoundToInt(cellSize + cellSize / 3), 0, 0);
         }
 
         public void CreateShape(int tileIndex, Sprite shapeSprite, bool isReflectedShape)

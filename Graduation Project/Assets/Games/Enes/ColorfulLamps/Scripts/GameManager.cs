@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MainMenu;
 
 namespace ColorfulLambs
 {
@@ -151,12 +152,14 @@ namespace ColorfulLambs
                 if (bestScore < level)
                 {
                     PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
+                    SkillSystemManager.CalculateSkillPoint(Category.Memory, SkillSystemManager.GameName.Lamps, 0.025f);
                     newBestScoreText.gameObject.SetActive(true);
                 }
             }
             else
             {
                 PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
+                SkillSystemManager.CalculateSkillPoint(Category.Memory, SkillSystemManager.GameName.Lamps, 0.025f);
                 newBestScoreText.gameObject.SetActive(true);
             }
         }

@@ -2,40 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Letter : MonoBehaviour
+namespace WordAdventure
 {
-    private TextMesh textMesh;
-
-    [HideInInspector] public string letter;
-    [HideInInspector] public int Lane;
-
-    void Start()
+    public class Letter : MonoBehaviour
     {
-        textMesh = GetComponent<TextMesh>();
-        SetLetter(0, "B");
-    }
+        private TextMesh textMesh;
 
-    public void SetLetter(int lane, string letter)
-    {
-        this.Lane = lane;
-        this.letter = letter;
-        textMesh.text = letter;
-        Vector3 newPos;
+        [HideInInspector] public string letter;
+        [HideInInspector] public int Lane;
 
-        if (lane == -1)
+        void Start()
         {
-            newPos = new Vector3(-5f, transform.position.y, transform.position.z);
-        }
-        else if (lane == 0)
-        {
-            newPos = new Vector3(-1.22f, transform.position.y, transform.position.z);
-
-        }
-        else
-        {
-            newPos = new Vector3(1.36f, transform.position.y, transform.position.z);
+            textMesh = GetComponent<TextMesh>();
+            SetLetter(0, CarController.GetRandomLetter());
         }
 
-        transform.position = newPos;
+        public void SetLetter(int lane, string letter)
+        {
+            this.Lane = lane;
+            this.letter = letter;
+            textMesh.text = letter;
+            Vector3 newPos;
+
+            if (lane == -1)
+            {
+                newPos = new Vector3(-5f, transform.position.y, transform.position.z);
+            }
+            else if (lane == 0)
+            {
+                newPos = new Vector3(-1.22f, transform.position.y, transform.position.z);
+
+            }
+            else
+            {
+                newPos = new Vector3(1.36f, transform.position.y, transform.position.z);
+            }
+
+            transform.position = newPos;
+        }
     }
 }
