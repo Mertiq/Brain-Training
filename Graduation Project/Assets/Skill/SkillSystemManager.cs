@@ -15,19 +15,23 @@ public class SkillSystemManager
         Percent,
         Time,
         Paint,
-        Card
+        Card,
+        Lamps,
+        Reflection,
     }
     
-    private static readonly Dictionary<GameName, float> Multiplier = new Dictionary<GameName, float>()
+    public static readonly Dictionary<GameName, float> Multiplier = new Dictionary<GameName, float>()
     {
         {GameName.Cashier, 16.67f},
         {GameName.Ten, 8.33f},
-        {GameName.FourOp, 16.67f},
+        {GameName.FourOp, 20.1f},
         {GameName.Fract, 16.67f},
         {GameName.Percent, 16.67f},
         {GameName.Time, 16.67f},
         {GameName.Paint, 20000f},
         {GameName.Card, 50000f},
+        {GameName.Lamps, 20000f},
+        {GameName.Reflection, 50000f},
     };
     
     public static void CalculateSkillPoint(Category skillName, GameName gameName, float point)

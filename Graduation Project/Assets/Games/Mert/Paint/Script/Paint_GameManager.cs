@@ -20,7 +20,8 @@ public class Paint_GameManager : MonoBehaviour
 
 	[SerializeField] private bool isGameEnd;
 	public delegate void GameEnd ();
-	public static event GameEnd OnGameEnd;   
+	public static event GameEnd OnGameEnd; 
+	
 	private void Start()
 	{
 		levelGenerator = GetComponent<Paint_LevelGenerator>();
@@ -83,8 +84,8 @@ public class Paint_GameManager : MonoBehaviour
 		if (isGameEnd)
 		{
 			OnGameEnd?.Invoke();
-			Time.timeScale = 0;
 			isGameEnd = !isGameEnd;
+			return;
 		}
 		SetSelectedColor();
 		if (!Input.GetMouseButtonDown(0)) return;

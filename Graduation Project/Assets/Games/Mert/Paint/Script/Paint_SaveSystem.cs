@@ -27,6 +27,7 @@ namespace Paint.Script
             {
                 SaveHighScore(newScore);
             }
+            SkillSystemManager.CalculateSkillPoint(MainMenu.Category.Matching, SkillSystemManager.GameName.Paint, (1f / newScore));
             OnScoreSaved?.Invoke();
         }
 

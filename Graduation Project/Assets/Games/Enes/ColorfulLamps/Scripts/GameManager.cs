@@ -25,6 +25,10 @@ namespace ColorfulLambs
         [SerializeField] private RectTransform gameScreen;
         [SerializeField] private TextMeshProUGUI endGameText;
         [SerializeField] private TextMeshProUGUI newBestScoreText;
+        [SerializeField] private Text endGameBestScoreText;
+        [SerializeField] private Text endGameCurrentScoreText;
+        [SerializeField] private GameObject endGamePanel;
+
 
         private AudioManager audioManager;
 
@@ -153,15 +157,18 @@ namespace ColorfulLambs
                 {
                     PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
                     SkillSystemManager.CalculateSkillPoint(Category.Memory, SkillSystemManager.GameName.Lamps, 0.025f);
-                    newBestScoreText.gameObject.SetActive(true);
                 }
             }
             else
             {
                 PlayerPrefs.SetInt("ColorfulLampsBestScore", level);
                 SkillSystemManager.CalculateSkillPoint(Category.Memory, SkillSystemManager.GameName.Lamps, 0.025f);
-                newBestScoreText.gameObject.SetActive(true);
             }
+
+            endGameCurrentScoreText.text = level + "";
+            endGameBestScoreText.text = bestScore + "";
+            endGamePanel.SetActive(true);
+            MainMenuAnimationController.VeryVeryShake(endGamePanel);
         }
 
         private int GetBestScore()

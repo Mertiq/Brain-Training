@@ -17,9 +17,9 @@ namespace FourOperations {
     public class OperationsControlManager : MonoBehaviour {
         public OperationMap[] operations = new OperationMap[4];
         public DraggableOperand[] draggableOperands = new DraggableOperand[3];
-        public EndGamePanelController endGamePanelController;
         public AudioManager audioManager;
-
+        public GameObject endGamePanel;
+        public Text endGameCurrentScoreText;
         public void InitalizeOperations() {
             Operation firstOp = GetOperation(OperationIndex.LEFT_TOP_TO_RIGHT);
             Operation secondOp = GetOperation(OperationIndex.BOTTOM_TO_RIGHT);
@@ -39,6 +39,10 @@ namespace FourOperations {
         }
         void Awake() {
             InitalizeOperations();
+            
+        }
+        private void Start()
+        {
             StartBackgroundMusic();
         }
 
@@ -123,15 +127,16 @@ namespace FourOperations {
                 Operand fourth = fourthOperation.RightOperand;
 
                 if(first.GetIsCorrectlyGuessed() && second.GetIsCorrectlyGuessed() && third.GetIsCorrectlyGuessed() && fourth.GetIsCorrectlyGuessed() ){
-                    Debug.Log("You win!");
                     audioManager.StopSound("background");
                     audioManager.PlaySound("win-music");
-                   // endGamePanelController.SetEndGameText("You win!");
-                    endGamePanelController.gameObject.SetActive(true);
-                }else{
-                    Debug.Log("You lost!");
-                    //endGamePanelController.SetEndGameText("You lost!");
-                    endGamePanelController.gameObject.SetActive(true);
+                    float score = SkillSystemManager.Multiplier[SkillSystemManager.GameName.FourOp];
+                    SkillSystemManager.CalculateSkillPoint(MainMenu.Category.Arithmetic, SkillSystemManager.GameName.FourOp, score);
+                    endGameCurrentScoreText.text = score + "";
+                    endGamePanel.SetActive(true);
+                    MainMenuAnimationController.VeryVeryShake(endGamePanel);
+                    Time.timeScale = 0f;
+                  
+                   
                 }
             }
         }

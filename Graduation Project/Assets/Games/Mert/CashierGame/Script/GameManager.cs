@@ -46,7 +46,7 @@ namespace CashierGame
             //SkillSystemManager.IncreaseSkillAndSave("Matematik",50);
             isGameEnd = true;
             OnGameEnd?.Invoke();
-            Time.timeScale = 0;
+            
         }
 
         private void CreateNewLevel()

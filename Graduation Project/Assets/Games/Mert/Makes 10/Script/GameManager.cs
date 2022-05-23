@@ -19,7 +19,9 @@ namespace Makes_10.Script
 		[SerializeField] private bool isGameEnd;
 		[SerializeField] public static int score;
 		[SerializeField] private int gameEndTime;
-		
+
+		[SerializeField] private Utilities.Timer timer;
+
 		public static int Score
 		{
 			get => score;
@@ -76,10 +78,14 @@ namespace Makes_10.Script
 				}
 			}
 			
-			if (!(Timer.currentTime >= gameEndTime)) return;
-			isGameEnd = true;
-			OnGameEnd?.Invoke();
-			Time.timeScale = 0;
+			if (!(timer.GetCurrentTime() >= gameEndTime)) return;
+			if(!isGameEnd)
+            {
+				isGameEnd = true;
+				OnGameEnd?.Invoke();
+			}
+			
+			//Time.timeScale = 0;
 		}
 
 		private void Control()

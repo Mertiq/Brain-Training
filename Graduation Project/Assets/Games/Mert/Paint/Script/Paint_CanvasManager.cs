@@ -13,11 +13,16 @@ namespace Paint.Script
         
         private void ShowEndGamePanel()
         {
-            endGamePanel.SetActive(true);
             highScoreText.text = saveSystem.LoadHighScore().ToString();
             newScoreText.text = saveSystem.NewScore.ToString();
+            endGamePanel.SetActive(true);
+            MainMenuAnimationController.VeryVeryShake(endGamePanel);
+            Invoke(nameof(StopScale), 0.5f);
         }
-
+        private void StopScale()
+        {
+            Time.timeScale = 0;
+        }
         private void OnEnable()
         {
             Paint_SaveSystem.OnScoreSaved += ShowEndGamePanel;
